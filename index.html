@@ -1,11 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AstroStore</title>
+    <link rel="stylesheet" href="protiprin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    
+    <header>
+        <h1>Minha Webstore</h1>
+        <div class="header-bar">
+            <nav>
+                <a href="#" id="nav-inicio" class="ativo"><i class="fas fa-home"></i> Início</a>
+                <a href="#" id="nav-catalogo"><i class="fas fa-th-list"></i> Catálogo</a>
+                <a href="#" id="nav-carrinho"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+                <a href="#" id="nav-perfil"><i class="fas fa-user"></i> Perfil</a>
+            </nav>
+            <div class="header-historico">
+                <h3><i class="fas fa-history"></i> Histórico</h3>
+                <ul id="historico-lista"></ul>
+            </div>
+        </div>
+        <div class="scroll-itens">
+            <div class="item-scroll" onclick="abrirDetalhesProduto()">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_612186-MLU75887345771_042024-O.webp" alt="Balinha IceKiss">
+                <span>Balinha IceKiss</span>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <main>
+            <section id="sec-inicio" class="secao">
+                <h2>Bem-vindo!</h2>
+                <p>Confira nossos produtos incríveis.</p>
+                <div class="produto" onclick="abrirDetalhesProduto()">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_612186-MLU75887345771_042024-O.webp" alt="Balinha IceKiss" style="width:120px;">
+                    <h3>Balinha IceKiss</h3>
+                    <p>R$ 0,25 cada</p>
+                    <button onclick="event.stopPropagation(); adicionarAoCarrinho();">Adicionar ao carrinho</button>
+                </div>
+            </section>
+            <section id="sec-catalogo" class="secao" style="display:none">
+                <h2>Catálogo</h2>
+                <div class="departamento">
+                    <button id="btn-doces" style="font-size:1.1em;padding:12px 28px;border-radius:8px;border:none;background:#0096c7;color:#fff;cursor:pointer;">
+                        <i class="fas fa-candy-cane"></i> Doces
+                    </button>
+                </div>
+            </section>
+            <section id="sec-doces" class="secao" style="display:none">
+                <h2>Departamento: Doces</h2>
+                <div class="produto" onclick="abrirDetalhesProduto()">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_612186-MLU75887345771_042024-O.webp" alt="Balinha IceKiss" style="width:120px;">
+                    <h3>Balinha IceKiss</h3>
+                    <p>R$ 0,25 cada</p>
+                    <button onclick="event.stopPropagation(); adicionarAoCarrinho();">Adicionar ao carrinho</button>
+                </div>
+                <button id="voltar-catalogo" style="margin-top:24px;font-size:1em;padding:8px 20px;border-radius:6px;border:none;background:#0077b6;color:#fff;cursor:pointer;">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Catálogo
+                </button>
+            </section>
+            <section id="sec-detalhes" class="secao" style="display:none">
+                <h2>Detalhes do Produto</h2>
+                <div class="produto-detalhe">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_612186-MLU75887345771_042024-O.webp" alt="Balinha IceKiss" style="width:150px;">
+                    <div>
+                        <h3>Balinha IceKiss</h3>
+                        <p>Preço: R$ 0,25 cada</p>
+                        <p>Deliciosa bala refrescante sabor menta.</p>
+                        <label>Quantidade:
+                            <input type="number" id="qtd-detalhe" value="1" min="1" style="width:60px;">
+                        </label>
+                        <br><br>
+                        <button onclick="adicionarAoCarrinhoDetalhe()">Adicionar ao carrinho</button>
+                        <button onclick="voltarUltimaSecao()" style="margin-left:12px;">Voltar</button>
+                    </div>
+                </div>
+            </section>
+            <section id="sec-carrinho" class="secao" style="display:none">
+                <h2>Carrinho</h2>
+                <div id="carrinho-itens" style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                    <!-- Ícone e quantidade aparecerão aqui -->
+                </div>
+                <p id="total-carrinho">Total: R$ 0,00</p>
+            </section>
+            <section id="sec-perfil" class="secao" style="display:none">
+                <h2>Perfil</h2>
+                <form id="form-perfil">
+                    <label>Nome: <input type="text" id="nome-perfil" value="Usuário Exemplo"></label><br><br>
+                    <label>Email: <input type="email" id="email-perfil" value="usuario@email.com"></label><br><br>
+                    <button type="button" onclick="alert('Dados salvos!')">Salvar</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2025 Minha Webstore</p>
+    </footer>
+    <script>
+    const links = document.querySelectorAll('nav a');
+    const secoes = document.querySelectorAll('.secao');
+    let ultimaSecao = 'sec-inicio';
+
+
+    // Histórico de visualização
+    let historico = [];
+    function adicionarHistorico(nome, img) {
+        // Evita duplicatas seguidas
+        if (historico.length === 0 || historico[historico.length-1].nome !== nome) {
+            historico.push({nome, img});
+            atualizarHistorico();
+        }
+    }
+    function atualizarHistorico() {
+        const lista = document.getElementById('historico-lista');
+        lista.innerHTML = '';
+        historico.slice(-10).reverse().forEach(item => {
+            const li = document.createElement('li');
+            li.style.display = 'flex';
+            li.style.alignItems = 'center';
+            li.style.gap = '8px';
+            li.innerHTML = `<img src="${item.img}" alt="${item.nome}" style="width:28px;height:28px;border-radius:6px;border:1px solid #eee;"> <span>${item.nome}</span>`;
+            lista.appendChild(li);
+        });
+    }
+
+
+    // Função para mostrar uma seção e esconder as outras
+    function mostrarSecao(id) {
+        secoes.forEach(sec => sec.style.display = 'none');
+        document.getElementById(id).style.display = 'flex';
+        ultimaSecao = id;
+    }
+
+
+    // Navegação principal
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            links.forEach(l => l.classList.remove('ativo'));
+            this.classList.add('ativo');
+            if(this.id === 'nav-inicio') mostrarSecao('sec-inicio');
+            if(this.id === 'nav-catalogo') mostrarSecao('sec-catalogo');
+            if(this.id === 'nav-carrinho') mostrarSecao('sec-carrinho');
+            if(this.id === 'nav-perfil') mostrarSecao('sec-perfil');
+        });
+    });
+
+
+    // Botão Doces no catálogo
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('btn-doces').onclick = function() {
+            mostrarSecao('sec-doces');
+        };
+        document.getElementById('voltar-catalogo').onclick = function() {
+            mostrarSecao('sec-catalogo');
+        };
+    });
+
+
+    // Carrinho simples
+    let carrinho = [];
+    function adicionarAoCarrinho() {
+        let item = carrinho.find(i => i.nome === "Balinha IceKiss");
+        if(item) {
+            item.qtd += 1;
+        } else {
+            carrinho.push({ nome: "Balinha IceKiss", preco: 0.25, qtd: 1 });
+        }
+        atualizarCarrinho();
+    }
+    function adicionarAoCarrinhoDetalhe() {
+        const qtd = parseInt(document.getElementById('qtd-detalhe').value) || 1;
+        let item = carrinho.find(i => i.nome === "Balinha IceKiss");
+        if(item) {
+            item.qtd += qtd;
+        } else {
+            carrinho.push({ nome: "Balinha IceKiss", preco: 0.25, qtd: qtd });
+        }
+        atualizarCarrinho();
+        mostrarSecao('sec-carrinho');
+        // Atualiza navegação para carrinho
+        links.forEach(l => l.classList.remove('ativo'));
+        document.getElementById('nav-carrinho').classList.add('ativo');
+    }
+    function atualizarCarrinho() {
+        const carrinhoDiv = document.getElementById('carrinho-itens');
+        carrinhoDiv.innerHTML = '';
+        let total = 0;
+        carrinho.forEach(item => {
+            const produtoDiv = document.createElement('div');
+            produtoDiv.style.display = 'flex';
+            produtoDiv.style.alignItems = 'center';
+            produtoDiv.style.gap = '8px';
+
+
+            const img = document.createElement('img');
+            img.src = "https://http2.mlstatic.com/D_NQ_NP_612186-MLU75887345771_042024-O.webp";
+            img.alt = item.nome;
+            img.style.width = "48px";
+            img.style.height = "48px";
+            img.style.borderRadius = "8px";
+            img.style.border = "1px solid #eee";
+
+
+            const qtd = document.createElement('span');
+            qtd.textContent = `x${item.qtd}`;
+            qtd.style.fontWeight = "bold";
+            qtd.style.fontSize = "1.2em";
+            qtd.style.marginLeft = "6px";
+
+
+            produtoDiv.appendChild(img);
+            produtoDiv.appendChild(qtd);
+            carrinhoDiv.appendChild(produtoDiv);
+
+
+            total += item.preco * item.qtd;
+        });
+        document.getElementById('total-carrinho').textContent = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+
+    // Página de detalhes do produto
+    function abrirDetalhesProduto() {
+        adicionarHistorico("Balinha IceKiss", "https://http2.mlstatic.com/D_NQ_NP_612186-MLU75887345771_042024-O.webp");
+        mostrarSecao('sec-detalhes');
+    }
+    function voltarUltimaSecao() {
+        mostrarSecao(ultimaSecao === 'sec-detalhes' ? 'sec-inicio' : ultimaSecao);
+    }
+    </script>
 </body>
 </html>
