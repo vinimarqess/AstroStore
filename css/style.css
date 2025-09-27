@@ -1,0 +1,140 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0a0a23 0%, #232357 100%);
+    color: #fff;
+    min-height: 100vh;
+    padding-bottom: 60px; /* espaço para o footer */
+}
+
+/* Header e Título */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 40px 10px 40px;
+    background: #181848;
+    box-shadow: 0 2px 8px #0002;
+}
+
+.astro-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #6a5acd, #00bfff, #8a2be2);
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px #0006;
+}
+
+/* Barra de Pesquisa */
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 20px 0 0 20px;
+    border: none;
+    outline: none;
+    width: 220px;
+    background: #232357;
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.search-bar input[type="text"]:focus {
+    background: #2e2e6a;
+}
+
+.search-bar button {
+    padding: 8px 16px;
+    border-radius: 0 20px 20px 0;
+    border: none;
+    background: #6a5acd;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.search-bar button:hover {
+    background: #483d8b;
+}
+
+/* Navegação */
+nav {
+    background: #232357;
+    padding: 12px 0;
+    text-align: center;
+    box-shadow: 0 2px 8px #0002;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 22px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.2s, border-bottom 0.2s;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover, nav a:focus {
+    color: #00bfff;
+    border-bottom: 2px solid #00bfff;
+}
+
+/* Conteúdo principal */
+.main-content {
+    padding: 40px;
+    min-height: 400px;
+}
+
+/* Footer fixo */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #181848;
+    color: #fff;
+    text-align: center;
+    padding: 14px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    box-shadow: 0 -2px 8px #0002;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+    .search-bar {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .search-bar input[type="text"] {
+        width: 100%;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    nav a {
+        margin: 0 10px;
+        font-size: 1rem;
+    }
+}
