@@ -2,18 +2,42 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Login - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-    <h1>Login</h1>
+<body class="catalogo-bg"> <header class="header">
+        <span class="astro-title">ASTRO STORE</span>
+        <form class="search-bar" action="#" method="get">
+            <input type="text" placeholder="Buscar produtos..." name="q">
+            <button type="submit">🔍</button>
+        </form>
+    </header>
     <nav>
-        <a href="index.html">Início</a> |
-        <a href="catalogo.html">Catálogo</a> |
-        <a href="carrinho.html">Carrinho</a> |
-        <a href="registro.html">Registrar</a>
+        <a href="TelaInicial.html">Início</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="login.html">Login</a>
+        <a href="registro.html">Registro</a>
     </nav>
-    <!-- Formulário de login -->
+
+    <div class="auth-container">
+        <form id="loginForm" class="auth-form">
+            <h1>Bem-vindo de volta!</h1>
+            <div class="input-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Digite seu email" required>
+            </div>
+            <div class="input-group">
+                <label for="loginPassword">Senha</label>
+                <input type="password" id="loginPassword" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="auth-btn">Entrar</button>
+            <p class="switch-form">Não tem uma conta? <a href="registro.html">Registre-se</a></p>
+        </form>
+    </div>
+    <footer>
+        &copy; 2025 Astro Store. Todos os direitos reservados.
+    </footer>
     <script src="pronpt.js"></script>
 </body>
 </html>

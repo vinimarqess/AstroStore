@@ -134,3 +134,53 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Telas de registro e login (Nathan)
+
+
+// Adiciona os novos listeners dentro do 'DOMContentLoaded' para garantir que a página carregou
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Lógica para o formulário de REGISTRO
+    const registerForm = document.getElementById('registerForm');
+    if(registerForm) {
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessageDiv = document.getElementById('errorMessage');
+
+            // Limpa erros anteriores
+            errorMessageDiv.textContent = ''; 
+
+            if (password.length < 6) {
+                errorMessageDiv.textContent = 'A senha deve ter no mínimo 6 caracteres.';
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessageDiv.textContent = 'As senhas não coincidem!';
+                return;
+            }
+
+            // Se tudo estiver certo
+            alert('Conta criada com sucesso!');
+            window.location.href = 'login.html'; // Redireciona para a página de login
+        });
+    }
+
+    // Lógica para o formulário de LOGIN
+    const loginForm = document.getElementById('loginForm');
+    if(loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário
+            
+            const email = document.getElementById('loginEmail').value;
+
+            // Simulação de login
+            alert(`Login bem-sucedido! Bem-vindo(a), ${email}!`);
+            window.location.href = 'TelaInicial.html'; // Redireciona para a página inicial
+        });
+    }
+
+});

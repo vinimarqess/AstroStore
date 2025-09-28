@@ -594,3 +594,99 @@ body.catalogo-bg {
         height: 90px;
     }
 }
+
+/* Estilos para Login e Registro - Nathan */
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    min-height: calc(100vh - 250px); /* Calcula altura para empurrar o footer */
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 450px;
+    background: #181848;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px #0004;
+    text-align: center;
+}
+
+.auth-form h1 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.auth-form .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.auth-form .input-group label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.auth-form .input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #232357;
+    outline: none;
+    background: #232357;
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.auth-form .input-group input:focus {
+    background: #2e2e6a;
+    border-color: #6a5acd;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+
+.auth-btn:hover {
+    background: #6a5acd;
+}
+
+.switch-form {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.switch-form a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #ff4d4d;
+    margin-bottom: 15px;
+    min-height: 1.2em;
+    font-size: 0.9rem;
+}
