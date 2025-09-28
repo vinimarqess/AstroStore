@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagamento - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <span class="astro-title">ASTRO STORE</span>
+        <form class="search-bar" action="#" method="get">
+            <input type="text" placeholder="Buscar produtos..." name="q">
+            <button type="submit">🔍</button>
+        </form>
+    </header>
+    <nav>
+        <a href="TelaInicial.html">Início</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="perfil.html" id="perfil-link" title="Perfil" style="display:inline-block;vertical-align:middle;text-align:center;">
+            <span style="font-size:1.5rem;vertical-align:middle;">👤</span>
+        </a>
+    </nav>
+    <div class="main-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;">
+        <section style="background:rgba(24,24,72,0.95);border-radius:18px;box-shadow:0 4px 24px #0005;padding:36px 32px;max-width:420px;width:100%;text-align:center;">
+            <h1 style="color:#00bfff;margin-bottom:18px;">Pagamento</h1>
+            <p style="color:#fff;opacity:.92;margin-bottom:24px;">Escolha o método de pagamento:</p>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+                <div style="background:#fff;border-radius:12px;padding:18px 0;box-shadow:0 2px 12px #0002;width:100%;max-width:320px;display:flex;flex-direction:column;align-items:center;">
+                    <img src="https://logodownload.org/wp-content/uploads/2020/02/pix-bc-logo-0.png" alt="Pix" style="width:90px;height:auto;margin-bottom:10px;">
+                    <span style="font-size:1.1rem;color:#232357;font-weight:bold;">Pagamento via Pix</span>
+                    <button class="buy-btn" style="margin-top:16px;" onclick="mostrarPix()">Gerar QR Code Pix</button>
+                </div>
+            </div>
+            <div id="pix-area" style="margin-top:30px;display:none;">
+                <h3 style="color:#00bfff;margin-bottom:10px;">Escaneie o QR Code para pagar</h3>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=chave-pix-exemplo@astrostore.com.br" alt="QR Code Pix" style="background:#fff;padding:8px;border-radius:10px;">
+                <p style="color:#fff;margin-top:10px;font-size:0.98rem;">Ou copie a chave Pix:<br><strong>chave-pix-exemplo@astrostore.com.br</strong></p>
+            </div>
+        </section>
+    </div>
+    <footer>
+        &copy; 2025 Astro Store. Todos os direitos reservados.
+    </footer>
+    <script>
+        function mostrarPix() {
+            document.getElementById('pix-area').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
