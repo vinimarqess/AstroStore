@@ -1,44 +1,87 @@
-/* Reset básico */
+/* ===================== RESET E GERAL (TODAS AS TELAS) ===================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
+body, .astro-title {
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* ===================== FUNDO ANIMADO ===================== */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0a0a23 0%, #232357 100%);
-    color: #fff;
     min-height: 100vh;
-    padding-bottom: 60px; /* espaço para o footer */
+    padding-bottom: 60px;
+    background: linear-gradient(-45deg, #232357, #6a5acd, #00bfff, #8a2be2);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: #fff;
+}
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
-/* Header e Título */
+/* ===================== HEADER E TÍTULO (TODAS AS TELAS) ===================== */
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 30px 40px 10px 40px;
-    background: #181848;
-    box-shadow: 0 2px 8px #0002;
+    background: rgba(24,24,72,0.95);
+    box-shadow: 0 2px 16px #0004;
+    backdrop-filter: blur(2px);
 }
 
 .astro-title {
     font-size: 2.5rem;
     font-weight: bold;
     background: linear-gradient(90deg, #6a5acd, #00bfff, #8a2be2);
-    -webkit-background-clip: text
+    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
-    text-shadow: 0 2px 8px #0006;
+    text-shadow: 0 2px 8px #00bfff88, 0 0 16px #8a2be244;
+    filter: drop-shadow(0 0 8px #00bfff44);
 }
 
-/* Barra de Pesquisa */
+/* ===================== ANIMAÇÃO DO TÍTULO ===================== */
+@keyframes astroTitleAnim {
+    0% {
+        letter-spacing: 10px;
+        opacity: 0;
+        filter: blur(8px);
+        transform: scale(1.2) rotate(-3deg);
+    }
+    60% {
+        letter-spacing: 2px;
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1.05) rotate(2deg);
+    }
+    100% {
+        letter-spacing: 2px;
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1) rotate(0deg);
+    }
+}
+.astro-title.animar-titulo {
+    animation: astroTitleAnim 1.1s cubic-bezier(.77,0,.18,1) both;
+}
+
+/* ===================== BARRA DE PESQUISA (TODAS AS TELAS) ===================== */
 .search-bar {
     display: flex;
     align-items: center;
+    background: rgba(35,35,87,0.7);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px #0002;
+    padding: 2px 6px;
 }
-
 .search-bar input[type="text"] {
     padding: 8px 12px;
     border-radius: 20px 0 0 20px;
@@ -50,11 +93,9 @@ body {
     font-size: 1rem;
     transition: background 0.2s;
 }
-
 .search-bar input[type="text"]:focus {
     background: #2e2e6a;
 }
-
 .search-bar button {
     padding: 8px 16px;
     border-radius: 0 20px 20px 0;
@@ -66,17 +107,17 @@ body {
     font-size: 1rem;
     transition: background 0.2s;
 }
-
 .search-bar button:hover {
     background: #483d8b;
 }
 
-/* Navegação */
+/* ===================== NAVEGAÇÃO (TODAS AS TELAS) ===================== */
 nav {
-    background: #232357;
+    background: rgba(35,35,87,0.95);
     padding: 12px 0;
     text-align: center;
-    box-shadow: 0 2px 8px #0002;
+    box-shadow: 0 2px 16px #0004;
+    backdrop-filter: blur(2px);
 }
 
 nav a {
@@ -85,23 +126,44 @@ nav a {
     margin: 0 22px;
     font-size: 1.1rem;
     font-weight: 500;
-    transition: color 0.2s, border-bottom 0.2s;
-    padding-bottom: 2px;
-    border-bottom: 2px solid transparent;
+    padding: 8px 0;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s;
+    border-bottom: none;
+}
+
+/* Animação de destaque com gradiente só no hover */
+nav a::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00bfff, #6a5acd, #8a2be2);
+    border-radius: 2px;
+    transition: width 0.35s cubic-bezier(.77,0,.18,1), left 0.35s cubic-bezier(.77,0,.18,1);
+    z-index: 1;
 }
 
 nav a:hover, nav a:focus {
     color: #00bfff;
-    border-bottom: 2px solid #00bfff;
 }
 
-/* Conteúdo principal */
+nav a:hover::before, nav a:focus::before {
+    width: 100%;
+    left: 0;
+}
+
+/* ===================== CONTEÚDO PRINCIPAL (TODAS AS TELAS) ===================== */
 .main-content {
     padding: 40px;
     min-height: 400px;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
 
-/* Carrinho - Astro Store */
+/* ===================== CARRINHO ===================== */
 .cart-container {
     display: flex;
     flex-direction: column;
@@ -109,6 +171,7 @@ nav a:hover, nav a:focus {
     justify-content: flex-start;
     padding: 40px 0 40px 80px;
     min-height: 70vh;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
 .cart-title {
     font-size: 2.2rem;
@@ -120,11 +183,12 @@ nav a:hover, nav a:focus {
 .cart-items {
     width: 100%;
     max-width: 600px;
-    background: #181848;
+    background: rgba(24,24,72,0.95);
     border-radius: 18px;
-    box-shadow: 0 4px 16px #0004;
+    box-shadow: 0 4px 32px #0006;
     padding: 32px 28px;
     margin-bottom: 32px;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
 .cart-items.empty {
     background: transparent;
@@ -138,6 +202,11 @@ nav a:hover, nav a:focus {
     margin-bottom: 18px;
     padding-bottom: 12px;
     border-bottom: 1px solid #232357;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+.cart-item:hover {
+    box-shadow: 0 8px 32px #0006;
+    transform: translateY(-4px) scale(1.02);
 }
 .cart-item:last-child {
     border-bottom: none;
@@ -155,6 +224,7 @@ nav a:hover, nav a:focus {
     border-radius: 8px;
     background: #fff;
     padding: 4px;
+    box-shadow: 0 2px 8px #0002;
 }
 .item-name {
     font-size: 1.1rem;
@@ -180,6 +250,7 @@ nav a:hover, nav a:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px #0002;
 }
 .qty-btn:hover {
     background: #483d8b;
@@ -205,6 +276,7 @@ nav a:hover, nav a:focus {
     font-size: 0.95rem;
     cursor: pointer;
     transition: background 0.2s;
+    box-shadow: 0 2px 8px #0002;
 }
 .remove-btn:hover {
     background: #c0392b;
@@ -216,7 +288,7 @@ nav a:hover, nav a:focus {
 }
 .checkout-btn {
     padding: 12px 32px;
-    background: #00bfff;
+    background: linear-gradient(90deg, #00bfff, #6a5acd);
     color: #fff;
     border: none;
     border-radius: 24px;
@@ -224,162 +296,31 @@ nav a:hover, nav a:focus {
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 .checkout-btn:hover {
     background: #6a5acd;
 }
 
-/* Footer fixo */
+/* ===================== FOOTER (TODAS AS TELAS) ===================== */
 footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background: #181848;
+    background: rgba(24,24,72,0.95);
     color: #fff;
     text-align: center;
     padding: 14px 0;
     font-size: 1rem;
     letter-spacing: 1px;
     box-shadow: 0 -2px 8px #0002;
+    backdrop-filter: blur(2px);
 }
 
-/* Responsividade */
-@media (max-width: 700px) {
-    /* Ajustes para telas pequenas */
-}
-/* Carrinho - Astro Store */
-body.carrinho-bg {
-    background: linear-gradient(135deg, #232357 0%, #6a5acd 100%);
-}
-.cart-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 40px 0 40px 80px;
-    min-height: 70vh;
-}
-.cart-title {
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #fff;
-    letter-spacing: 2px;
-}
-.cart-items {
-    width: 100%;
-    max-width: 600px;
-    background: #181848;
-    border-radius: 18px;
-    box-shadow: 0 4px 16px #0004;
-    padding: 32px 28px;
-    margin-bottom: 32px;
-}
-.cart-items.empty {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-}
-.cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #232357;
-}
-.cart-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-.item-info {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-.item-img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 8px;
-    background: #fff;
-    padding: 4px;
-}
-.item-name {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #00bfff;
-}
-.qty-controls {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: 10px;
-}
-.qty-btn {
-    background: #6a5acd;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.qty-btn:hover {
-    background: #483d8b;
-}
-.item-qty {
-    font-size: 1rem;
-    color: #fff;
-    min-width: 24px;
-    text-align: center;
-}
-.item-price {
-    font-size: 1.1rem;
-    color: #fff;
-    font-weight: bold;
-    margin-right: 18px;
-}
-.remove-btn {
-    background: #ff4d4d;
-    color: #fff;
-    border: none;
-    border-radius: 16px;
-    padding: 6px 16px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.remove-btn:hover {
-    background: #c0392b;
-}
-.cart-summary {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 24px;
-}
-.checkout-btn {
-    padding: 12px 32px;
-    background: #00bfff;
-    color: #fff;
-    border: none;
-    border-radius: 24px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.checkout-btn:hover {
-    background: #6a5acd;
-}
-
-/* Catálogo - Astro Store */
+/* ===================== CATÁLOGO ===================== */
 body.catalogo-bg {
     background: linear-gradient(135deg, #232357 0%, #6a5acd 100%);
 }
@@ -388,6 +329,7 @@ body.catalogo-bg {
     flex-direction: column;
     align-items: center;
     padding: 40px 0;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
 .catalog-title {
     font-size: 2.2rem;
@@ -404,27 +346,30 @@ body.catalogo-bg {
     margin-bottom: 30px;
 }
 .category-card {
-    background: #181848;
+    background: rgba(24,24,72,0.95);
     border-radius: 18px;
-    box-shadow: 0 4px 16px #0004;
+    box-shadow: 0 4px 32px #0006;
     padding: 32px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.3s;
     text-decoration: none;
     color: #fff;
     min-width: 180px;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
 .category-card:hover, .category-card.active {
     background: #6a5acd;
-    transform: translateY(-6px) scale(1.04);
+    transform: translateY(-6px) scale(1.04) rotate(-1deg);
     color: #fff;
+    box-shadow: 0 8px 32px #0006;
 }
 .category-icon {
     font-size: 2.5rem;
     margin-bottom: 12px;
+    filter: drop-shadow(0 2px 8px #00bfff44);
 }
 .category-name {
     font-size: 1.2rem;
@@ -439,15 +384,21 @@ body.catalogo-bg {
     width: 100%;
 }
 .item-card {
-    background: #181848;
+    background: rgba(24,24,72,0.95);
     border-radius: 18px;
-    box-shadow: 0 4px 16px #0004;
+    box-shadow: 0 4px 32px #0006;
     padding: 32px 28px;
     display: flex;
     align-items: center;
     gap: 32px;
     max-width: 500px;
     width: 100%;
+    transition: box-shadow 0.3s, transform 0.3s;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
+}
+.item-card:hover {
+    box-shadow: 0 8px 32px #00bfff88;
+    transform: translateY(-6px) scale(1.04) rotate(-1deg);
 }
 .item-card img {
     width: 120px;
@@ -456,6 +407,7 @@ body.catalogo-bg {
     border-radius: 12px;
     background: #fff;
     padding: 8px;
+    box-shadow: 0 2px 8px #0002;
 }
 .item-info {
     display: flex;
@@ -479,7 +431,7 @@ body.catalogo-bg {
 .buy-btn {
     margin-top: 10px;
     padding: 8px 20px;
-    background: #00bfff;
+    background: linear-gradient(90deg, #00bfff, #6a5acd);
     color: #fff;
     border: none;
     border-radius: 20px;
@@ -487,12 +439,15 @@ body.catalogo-bg {
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 .buy-btn:hover {
     background: #6a5acd;
 }
 
-/* Modal de informações do produto */
+/* ===================== MODAL DE INFORMAÇÕES DO PRODUTO (CATÁLOGO) ===================== */
 .modal-produto {
     position: fixed;
     z-index: 9999;
@@ -502,6 +457,7 @@ body.catalogo-bg {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: fadeInUp 0.5s cubic-bezier(.77,0,.18,1);
 }
 .modal-content {
     background: #181848;
@@ -514,6 +470,7 @@ body.catalogo-bg {
     max-width: 350px;
     width: 90vw;
     position: relative;
+    animation: fadeInUp 0.5s cubic-bezier(.77,0,.18,1);
 }
 .close-modal {
     position: absolute;
@@ -531,6 +488,7 @@ body.catalogo-bg {
     background: #fff;
     padding: 8px;
     margin-bottom: 18px;
+    box-shadow: 0 2px 8px #0002;
 }
 .modal-content h2 {
     color: #00bfff;
@@ -542,14 +500,13 @@ body.catalogo-bg {
     text-align: center;
 }
 
-/* Estilos para caixa de carrinho vazio */
+/* ===================== CAIXA DE CARRINHO VAZIO (CARRINHO) ===================== */
 #empty-cart-box {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin-top: 20px;
 }
-
 #empty-cart-box > div {
     background: #181848;
     color: #fff;
@@ -561,17 +518,16 @@ body.catalogo-bg {
     flex-direction: column;
     gap: 16px;
     align-items: center;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
-
 #empty-cart-box p {
     margin: 0 0 8px 0;
 }
-
 #empty-cart-box .buy-btn {
     margin-top: 0;
 }
 
-/* Responsividade catálogo */
+/* ===================== RESPONSIVIDADE CATÁLOGO ===================== */
 @media (max-width: 700px) {
     .catalog-container {
         padding: 20px 0;
@@ -593,4 +549,128 @@ body.catalogo-bg {
         width: 90px;
         height: 90px;
     }
+}
+
+/* ===================== PERFIL ===================== */
+.perfil-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: rgba(24,24,72,0.95);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #0006;
+    padding: 32px 28px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
+}
+.perfil-container h2 {
+    margin-bottom: 24px;
+}
+.perfil-btn {
+    margin: 10px 0;
+    padding: 10px 24px;
+    background: linear-gradient(90deg, #00bfff, #6a5acd);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.perfil-btn:hover {
+    background: #6a5acd;
+}
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 16px;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
+}
+.perfil-form input {
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+}
+.logout-btn {
+    background: #ff4d4d;
+    margin-top: 20px;
+}
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+/* ===================== Nome de usuário abaixo do ícone de perfil na barra de navegação ===================== */
+#perfil-nome-nav {
+    display: block;
+    font-size: 0.85rem;
+    color: #fff;
+    line-height: 1.1;
+    margin-top: 2px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 4px #0008;
+    white-space: nowrap;
+}
+
+/* ===================== PERFIL - OPÇÕES EXTRAS ===================== */
+.perfil-form ul {
+    padding-left: 18px;
+    margin: 0;
+}
+.perfil-form ul li {
+    color: #fff;
+    margin-bottom: 4px;
+}
+.perfil-form a {
+    color: #00bfff;
+    text-decoration: underline;
+}
+.perfil-form a:hover {
+    color: #6a5acd;
+}
+
+/* ===================== EFEITO DE BRILHO NOS BOTÕES ===================== */
+.perfil-btn, .buy-btn, .checkout-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.perfil-btn::after, .buy-btn::after, .checkout-btn::after {
+    content: "";
+    position: absolute;
+    left: -75%;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, #fff8, transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s;
+    z-index: 2;
+}
+.perfil-btn:hover::after, .buy-btn:hover::after, .checkout-btn:hover::after {
+    left: 120%;
+}
+
+/* ===================== ANIMAÇÃO DE ENTRADA NOS CARDS ===================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.item-card, .category-card {
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
 }
