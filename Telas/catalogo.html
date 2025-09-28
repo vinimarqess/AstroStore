@@ -2,11 +2,17 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Catálogo - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-    <h1>Catálogo de Produtos</h1>
+<body class="catalogo-bg">
+    <header class="header">
+        <span class="astro-title">ASTRO STORE</span>
+        <form class="search-bar" action="#" method="get">
+            <input type="text" placeholder="Buscar produtos..." name="q">
+            <button type="submit">🔍</button>
+        </form>
+    </header>
     <nav>
         <a href="TelaInicial.html">Início</a>
         <a href="catalogo.html">Catálogo</a>
@@ -14,6 +20,33 @@
         <a href="login.html">Login</a>
         <a href="registro.html">Registro</a>
     </nav>
-    <!-- Conteúdo do catálogo -->
+    <div class="catalog-container">
+        <div class="catalog-title">Categorias</div>
+        <div class="category-list" id="category-list">
+            <div class="category-card" data-category="doces">
+                <span class="category-icon">🍬</span>
+                <span class="category-name">Doces</span>
+            </div>
+            <!-- Adicione mais categorias aqui -->
+        </div>
+        <div class="products-area" id="products-area" style="display:none;">
+            <!-- Os produtos aparecerão aqui -->
+        </div>
+    </div>
+    <!-- Modal de informações do produto -->
+    <div id="modal-produto" class="modal-produto" style="display:none;">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <img id="modal-img" src="" alt="" class="modal-img">
+            <h2 id="modal-nome"></h2>
+            <p id="modal-desc"></p>
+            <p id="modal-preco"></p>
+            <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][0]); event.stopPropagation();">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Astro Store. Todos os direitos reservados.
+    </footer>
+    <script src="pronpt.js"></script>
 </body>
 </html>

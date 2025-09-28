@@ -2,11 +2,17 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Carrinho</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Carrinho - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-    <h1>Seu Carrinho</h1>
+<body class="carrinho-bg">
+    <header class="header">
+        <span class="astro-title">ASTRO STORE</span>
+        <form class="search-bar" action="#" method="get">
+            <input type="text" placeholder="Buscar produtos..." name="q">
+            <button type="submit">🔍</button>
+        </form>
+    </header>
     <nav>
         <a href="TelaInicial.html">Início</a>
         <a href="catalogo.html">Catálogo</a>
@@ -14,6 +20,94 @@
         <a href="login.html">Login</a>
         <a href="registro.html">Registro</a>
     </nav>
-    <!-- Conteúdo do carrinho -->
+    <div class="cart-container">
+        <div class="cart-title">Seu Carrinho</div>
+        <div class="cart-items" id="cart-items">
+            <!-- Produtos do carrinho aparecem aqui -->
+        </div>
+        <div class="cart-summary" id="cart-summary">
+            <!-- Resumo do carrinho -->
+        </div>
+        <div id="empty-cart-box" style="display:none; margin-top:20px;">
+            <div>
+                <p>Seu carrinho está vazio.</p>
+                <a href="catalogo.html" class="buy-btn" style="text-decoration:none;">Ir para o Catálogo</a>
+            </div>
+        </div>
+        <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='pagamento.html'">Ir para Pagamento</button>
+    </div>
+    <footer>
+        &copy; 2025 Astro Store. Todos os direitos reservados.
+    </footer>
+    <script src="pronpt.js"></script>
+    <script>
+        function getCarrinho() {
+            return JSON.parse(localStorage.getItem('carrinho')) || [];
+        }
+
+        function salvarCarrinho(carrinho) {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        }
+
+        function renderCarrinho() {
+            let carrinho = getCarrinho();
+            const cartItems = document.getElementById('cart-items');
+            const cartSummary = document.getElementById('cart-summary');
+            const emptyBox = document.getElementById('empty-cart-box');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            cartItems.innerHTML = '';
+            let total = 0;
+            if (carrinho.length === 0) {
+                cartItems.classList.add('empty');
+                cartSummary.innerHTML = '';
+                emptyBox.style.display = 'block';
+                if (checkoutBtn) checkoutBtn.style.display = 'none';
+                return;
+            }
+            cartItems.classList.remove('empty');
+            emptyBox.style.display = 'none';
+            if (checkoutBtn) checkoutBtn.style.display = 'inline-block';
+            carrinho.forEach((item, idx) => {
+                total += item.preco * item.quantidade;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <img class="item-img" src="${item.img}" alt="${item.nome}">
+                            <span class="item-name">${item.nome}</span>
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="alterarQuantidade(${idx}, -1)">-</button>
+                                <span class="item-qty">${item.quantidade}</span>
+                                <button class="qty-btn" onclick="alterarQuantidade(${idx}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="item-price">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+                            <button class="remove-btn" onclick="removerItem(${idx})">Remover</button>
+                        </div>
+                    </div>
+                `;
+            });
+            cartSummary.innerHTML = `Total: <strong>R$ ${total.toFixed(2)}</strong>`;
+        }
+
+        function removerItem(idx) {
+            let carrinho = getCarrinho();
+            carrinho.splice(idx, 1);
+            salvarCarrinho(carrinho);
+            renderCarrinho();
+        }
+
+        function alterarQuantidade(idx, delta) {
+            let carrinho = getCarrinho();
+            carrinho[idx].quantidade += delta;
+            if (carrinho[idx].quantidade < 1) {
+                carrinho[idx].quantidade = 1;
+            }
+            salvarCarrinho(carrinho);
+            renderCarrinho();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCarrinho);
+    </script>
 </body>
 </html>
