@@ -48,6 +48,24 @@ body {
     filter: drop-shadow(0 0 8px #00bfff44);
 }
 
+.perfil-icon {
+    font-size: 1.5rem;
+    color: #fff;
+    padding: 10px 7px;
+    border-radius: 50%;
+    display: inline-flex;      
+    align-items: center;      
+    justify-content: center;    
+    text-decoration: none;
+    line-height: 1;              
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.perfil-icon:hover {
+    background: rgba(111, 63, 255, 0.207); /* fundo aparece ao passar o mouse */
+    transform: scale(1.1);
+}
+
 /* ===================== ANIMAÇÃO DO TÍTULO ===================== */
 @keyframes astroTitleAnim {
     0% {
@@ -75,15 +93,15 @@ body {
 
 /* ===================== BARRA DE PESQUISA (TODAS AS TELAS) ===================== */
 .search-bar {
-    display: flex;
-    align-items: center;
-    background: rgba(35,35,87,0.7);
-    border-radius: 20px;
-    box-shadow: 0 2px 8px #0002;
-    padding: 2px 6px;
+
+    background: rgba;
+    border-radius: 500px;
+    flex: 1;
+    max-width: 500px;
+    margin: 0 auto; 
 }
 .search-bar input[type="text"] {
-    padding: 8px 12px;
+    padding: 8px 15px;
     border-radius: 20px 0 0 20px;
     border: none;
     outline: none;
@@ -97,7 +115,7 @@ body {
     background: #2e2e6a;
 }
 .search-bar button {
-    padding: 8px 16px;
+    padding: 8px 14px;
     border-radius: 0 20px 20px 0;
     border: none;
     background: #6a5acd;
@@ -133,7 +151,7 @@ nav a {
     border-bottom: none;
 }
 
-/* Animação de destaque com gradiente so no hover */
+/* Animação de destaque ao passar o mouse */
 nav a::before {
     content: '';
     position: absolute;
