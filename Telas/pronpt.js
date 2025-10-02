@@ -361,6 +361,7 @@ function animarTituloAstro() {
 }
 
 // Anima ao carregar a página
+document.addEventListener('DOMContentLoaded', animarTituloAstro);
 
 // Anima ao clicar em qualquer link da barra de navegação
 document.addEventListener('DOMContentLoaded', function() {
