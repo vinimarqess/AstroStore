@@ -361,7 +361,6 @@ function animarTituloAstro() {
 }
 
 // Anima ao carregar a página
-document.addEventListener('DOMContentLoaded', animarTituloAstro);
 
 // Anima ao clicar em qualquer link da barra de navegação
 document.addEventListener('DOMContentLoaded', function() {
@@ -404,9 +403,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
+
 // Telas de registro e login (Nathan)
-
-
 // Adiciona os novos listeners dentro do 'DOMContentLoaded' para garantir que a página carregou
 document.addEventListener('DOMContentLoaded', function() {
     

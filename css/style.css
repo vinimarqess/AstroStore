@@ -626,7 +626,7 @@ body.catalogo-bg {
     background: #c0392b;
 }
 
-/* ===================== Nome de usuário abaixo do ícone de perfil na barra de navegação ===================== */
+/* ===================== Nome de usuario abaixo do ícone de perfil na barra de navegação ===================== */
 #perfil-nome-nav {
     display: block;
     font-size: 0.85rem;
@@ -639,7 +639,7 @@ body.catalogo-bg {
     white-space: nowrap;
 }
 
-/* ===================== PERFIL - OPÇÕES EXTRAS ===================== */
+/* ===================== PERFIL - OPÇoES EXTRAS ===================== */
 .perfil-form ul {
     padding-left: 18px;
     margin: 0;
@@ -707,6 +707,8 @@ body.catalogo-bg {
     letter-spacing: 1px;
 }
 
+/* ===================== Carrossel ===================== */
+
 .carousel {
     position: relative;
     width: 80%;
@@ -750,3 +752,7 @@ body.catalogo-bg {
 
 .prev { left: 0px; }
 .next { right: 0px; }
+
+/* ================Lista de Itens================= */
+
+
