@@ -351,9 +351,9 @@ function fecharModalPesquisa() {
 document.addEventListener('DOMContentLoaded', function() {
     
     // --- CARROSSEL ---
-    const track = document.querySelector(".carousel-track");
+    const track = document.querySelector(".carrossel-track");
     if (track) {
-        const items = document.querySelectorAll(".carousel-item");
+        const items = document.querySelectorAll(".carrossel-item");
         const prevButton = document.querySelector(".prev");
         const nextButton = document.querySelector(".next");
         if (prevButton && nextButton && items.length > 0) {

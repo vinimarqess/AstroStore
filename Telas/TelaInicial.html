@@ -35,32 +35,32 @@
         <a href="carrinho.html">Carrinho</a>
     </nav>
 
-    <h1 class="destaques-titulo">✨ Destaques Galácticos do Mês ✨</h1>
+    <h1 class="destaques-titulo">Destaques do Mês</h1>
     <!-- Carrossel -->
     <section class="destaques">
-        <div class="carousel">
+        <div class="carrossel">
             <button class="prev">❮</button>
 
-            <div class="carousel-container">
-                <div class="carousel-track">
-                    <!-- Slide 1 - Balinha Icekiss -->
-                    <div class="carousel-item" onclick="mostrarProdutoCarrossel(0)">
+            <div class="carrossel-container">
+                <div class="carrossel-track">
+                    <!-- produto 1 - Balinha Icekiss -->
+                    <div class="carrossel-item" onclick="mostrarProdutoCarrossel(0)">
                         <img src="https://http2.mlstatic.com/D_NQ_NP_844675-MLA84177545292_052025-O.webp" alt="Balinha Icekiss">
-                        <h3>🌟 Balinha Icekiss</h3>
+                        <h3>Balinha Icekiss</h3>
                         <p>R$ 2,50</p>
                     </div>
 
-                    <!-- Slide 2 - Bala de Menta -->
-                    <div class="carousel-item" onclick="mostrarProdutoCarrossel(1)">
+                    <!-- produto 2 - Bala de Menta -->
+                    <div class="carrossel-item" onclick="mostrarProdutoCarrossel(1)">
                         <img src="https://phygital-files.mercafacil.com/gui-box/uploads/produto/bala_peccin_menta_un_09f53a4e-30cf-40e9-8f9a-e37632d266ca.jpeg" alt="Bala de Menta Peccin">
-                        <h3>🍃 Bala de Menta</h3>
+                        <h3>Bala de Menta</h3>
                         <p>R$ 1,50</p>
                     </div>
 
-                    <!-- Slide 3 - Balinha Chita -->
-                    <div class="carousel-item" onclick="mostrarProdutoCarrossel(2)">
+                    <!-- produto 3 - Balinha Chita -->
+                    <div class="carrossel-item" onclick="mostrarProdutoCarrossel(2)">
                         <img src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
-                        <h3>🚀 Balinha Chita</h3>
+                        <h3>Balinha Chita</h3>
                         <p>R$ 1,80</p>
                     </div>
                 </div>
@@ -82,31 +82,72 @@
         </div>
     </div>
 
-    <div class="main-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;">
-        <section style="text-align:center;max-width:600px;">
-            <h1 style="font-size:2.7rem; margin-bottom:10px; letter-spacing:2px; color:#00bfff;text-shadow:0 2px 8px #0006;">Bem-vindo à Astro Store!</h1>
-            <p style="font-size:1.2rem;color:#fff;opacity:.92;margin-bottom:30px;">
-                Sua loja de produtos incríveis, com um toque do universo! Descubra novidades, promoções e uma experiência de compra fora deste mundo.
-            </p>
-
-        </section>
+    <div class="grade">
+            <h1 class="grade-title">Bem-vindo à Astro Store!</h1>
         <section style="margin-top:40px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center;">
-            <div style="background:rgba(24,24,72,0.92);border-radius:18px;box-shadow:0 4px 24px #0005;padding:28px 32px;min-width:220px;max-width:260px;display:flex;flex-direction:column;align-items:center;animation:fadeInUp 1s;">
-                <span style="font-size:2.5rem;margin-bottom:10px;">🪐</span>
-                <h3 style="color:#00bfff;margin-bottom:8px;">Produtos Únicos</h3>
-                <p style="color:#fff;opacity:.85;font-size:1rem;">Itens selecionados para surpreender você e sua família.</p>
+            
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://http2.mlstatic.com/D_NQ_NP_844675-MLA84177545292_052025-O.webp" alt="Balinha Icekiss">
+                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][0]); event.stopPropagation();">Comprar</button>
             </div>
-            <div style="background:rgba(24,24,72,0.92);border-radius:18px;box-shadow:0 4px 24px #0005;padding:28px 32px;min-width:220px;max-width:260px;display:flex;flex-direction:column;align-items:center;animation:fadeInUp 1.2s;">
-                <span style="font-size:2.5rem;margin-bottom:10px;">💫</span>
-                <h3 style="color:#00bfff;margin-bottom:8px;">Entrega Rápida</h3>
-                <p style="color:#fff;opacity:.85;font-size:1rem;">Receba seus pedidos em tempo recorde, com segurança e agilidade.</p>
+
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://phygital-files.mercafacil.com/gui-box/uploads/produto/bala_peccin_menta_un_09f53a4e-30cf-40e9-8f9a-e37632d266ca.jpeg" alt="Bala de Menta Peccin">
+                        <h2 id="modal-nome"></h2>
+                        <p id="modal-preco"></p>
+                <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][1]); event.stopPropagation();">Comprar</button>
             </div>
-            <div style="background:rgba(24,24,72,0.92);border-radius:18px;box-shadow:0 4px 24px #0005;padding:28px 32px;min-width:220px;max-width:260px;display:flex;flex-direction:column;align-items:center;animation:fadeInUp 1.4s;">
-                <span style="font-size:2.5rem;margin-bottom:10px;">🌟</span>
-                <h3 style="color:#00bfff;margin-bottom:8px;">Atendimento 5 Estrelas</h3>
-                <p style="color:#fff;opacity:.85;font-size:1rem;">Suporte dedicado para garantir sua melhor experiência de compra.</p>
+            
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
+                        <h2 id="modal-nome"></h2>
+                        <p id="modal-desc"></p>
+                        <p id="modal-preco"></p>
+                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][2]); event.stopPropagation();">Comprar</button>
+            </div>
+            
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://http2.mlstatic.com/D_NQ_NP_844675-MLA84177545292_052025-O.webp" alt="Balinha Icekiss">
+                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][0]); event.stopPropagation();">Comprar</button>
+            </div>
+
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://phygital-files.mercafacil.com/gui-box/uploads/produto/bala_peccin_menta_un_09f53a4e-30cf-40e9-8f9a-e37632d266ca.jpeg" alt="Bala de Menta Peccin">
+                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][1]); event.stopPropagation();">Comprar</button>
+            </div>
+
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
+                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][2]); event.stopPropagation();">Comprar</button>
+            </div>
+
+            <div class = "bloco_produto">
+                <img class = "imagem_item" src="https://http2.mlstatic.com/D_NQ_NP_844675-MLA84177545292_052025-O.webp" alt="Balinha Icekiss">
+                <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][0]); event.stopPropagation();">Comprar</button>
+            </div>
+
+            <div class = "bloco_produto">
+                    <img class = "imagem_item" src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
+                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][2]); event.stopPropagation();">Comprar</button>
             </div>
         </section>
+        <h1 class="grade-title">...</h1>
+
+        <div class="catalog-container">
+        <div class="catalog-title">Categorias</div>
+        <div class="category-list" id="category-list">
+            <div class="category-card" data-category="doces">
+                <span class="category-icon">🍬</span>
+                <span class="category-name">Doces</span>
+            </div>
+            <!-- Adicione mais categorias aqui -->
+        </div>
+        <div class="products-area" id="products-area" style="display:none;">
+            <!-- Os produtos aparecerão aqui -->
+        </div>
+    </div>
+
+         <!-- Modal de informações do produto -->
 
     </div>
     

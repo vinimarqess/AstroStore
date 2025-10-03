@@ -27,7 +27,7 @@ body {
     100% {background-position: 0% 50%;}
 }
 
-/* ===================== HEADER E TÍTULO (TODAS AS TELAS) ===================== */
+/* ===================== HEADER E TITULO (TODAS AS TELAS) ===================== */
 .header {
     display: flex;
     align-items: center;
@@ -187,12 +187,6 @@ nav a:hover::before, nav a:focus::before {
     left: 0;
 }
 
-/* ===================== CONTEUDO PRINCIPAL (TODAS AS TELAS) ===================== */
-.main-content {
-    padding: 40px;
-    min-height: 400px;
-    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
-}
 
 /* ===================== CARRINHO ===================== */
 .cart-container {
@@ -712,7 +706,7 @@ body.catalogo-bg {
     padding: 20px 0 10px 0;
     text-align: center;
     font-size: 2.4rem;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
     color: #ffffff;
     text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     font-weight: bold;
@@ -721,11 +715,11 @@ body.catalogo-bg {
 
 /* ===================== Carrossel ===================== */
 
-.carousel {
+.carrossel {
     position: relative;
-    width: 95%;
-    max-width: 1400px;
-    margin: 40px auto;
+    width: 90%;
+    max-width: 1600px;
+    margin: 15px auto;
     overflow: visible;
     border-radius: 25px;
     background: linear-gradient(145deg, rgba(24,24,72,0.8), rgba(35,35,87,0.9));
@@ -738,7 +732,7 @@ body.catalogo-bg {
     padding: 30px 80px;
 }
 
-.carousel::before {
+.carrossel::before {
     content: '';
     position: absolute;
     top: -2px;
@@ -757,19 +751,19 @@ body.catalogo-bg {
     50% { background-position: 100% 50%; }
 }
 
-.carousel-container {
+.carrossel-container {
     overflow: hidden;
     border-radius: 20px;
     position: relative;
 }
 
-.carousel-track {
+.carrossel-track {
     display: flex;
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform-style: preserve-3d;
 }
 
-.carousel-item {
+.carrossel-item {
     min-width: 100%;
     text-align: center;
     cursor: pointer;
@@ -780,11 +774,11 @@ body.catalogo-bg {
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.carousel-item:hover {
+.carrossel-item:hover {
     transform: translateY(-10px) scale(1.02);
 }
 
-.carousel-item img {
+.carrossel-item img {
     width: 300px;
     height: 250px;
     object-fit: contain;
@@ -800,7 +794,7 @@ body.catalogo-bg {
     overflow: hidden;
 }
 
-.carousel-item img::before {
+.carrossel-item img::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -813,7 +807,7 @@ body.catalogo-bg {
     opacity: 0;
 }
 
-.carousel-item:hover img {
+.carrossel-item:hover img {
     transform: rotateY(5deg) rotateX(5deg);
     box-shadow: 
         0 25px 50px rgba(0, 0, 0, 0.4),
@@ -821,12 +815,12 @@ body.catalogo-bg {
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.carousel-item:hover img::before {
+.carrossel-item:hover img::before {
     opacity: 1;
     transform: rotate(45deg) translate(50%, 50%);
 }
 
-.carousel-item h3 {
+.carrossel-item h3 {
     color: #00bfff;
     margin: 20px 0 10px 0;
     font-size: 1.8rem;
@@ -853,7 +847,7 @@ body.catalogo-bg {
     }
 }
 
-.carousel-item p {
+.carrossel-item p {
     color: #fff;
     font-size: 1.4rem;
     font-weight: bold;
@@ -866,7 +860,7 @@ body.catalogo-bg {
     position: relative;
 }
 
-.carousel-item::after {
+.carrossel-item::after {
     content: '';
     position: absolute;
     top: 0;
@@ -880,7 +874,7 @@ body.catalogo-bg {
     border-radius: 20px;
 }
 
-.carousel-item:hover::after {
+.carrossel-item:hover::after {
     opacity: 1;
 }
 
@@ -943,7 +937,7 @@ body.catalogo-bg {
 }
 
 /* Indicadores de slide */
-.carousel::after {
+.carrossel::after {
     content: '';
     position: absolute;
     bottom: 10px;
@@ -962,11 +956,11 @@ body.catalogo-bg {
 }
 
 /* Efeito de partículas */
-.carousel-item:hover {
+.carrossel-item:hover {
     position: relative;
 }
 
-.carousel-item:hover::before {
+.carrossel-item:hover::before {
     content: '';
     position: absolute;
     top: 0;
@@ -988,4 +982,49 @@ body.catalogo-bg {
     100% { background-position: 50px 50px, 30px 30px, 70px 70px; }
 }
 
+/* ===================== Grade de produtos ===================== */
 
+.grade{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:70vh;
+}
+
+.grade-titulo {
+    font-size:2.7rem; 
+    margin-bottom:10px; 
+    letter-spacing:2px; 
+    color:#ffffff;
+    text-shadow:0 2px 8px #0006;
+}
+
+.bloco_produto {
+    background:rgba(24,24,72,0.92);
+    border-radius:18px;
+    box-shadow:0 4px 24px #0005;
+    padding:28px 32px;min-width:220px;
+    max-width:260px;display:flex;
+    flex-direction:column;
+    align-items:center;
+    animation:fadeInUp 1s;
+}
+
+.imagem_item {
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #fff;
+    padding: 4px;
+    box-shadow: 0 2px 8px #0002;
+}
+
+produto_area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+}
