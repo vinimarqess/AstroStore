@@ -755,4 +755,108 @@ body.catalogo-bg {
 
 /* ================Lista de Itens================= */
 
+/* ===================== TELAS DE LOGIN E REGISTRO ===================== */
+
+.login-registro-bg {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.auth-container {
+    max-width: 450px;
+    width: 90%;
+    margin: 40px auto;
+    background: rgba(24, 24, 72, 0.92);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #0006;
+    padding: 30px 40px;
+    color: #fff;
+    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
+    flex-grow: 1;
+}
+
+.auth-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #00bfff;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 8px #00bfff88;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: #ccc;
+    padding-left: 5px;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #6a5acd;
+    background: #232357;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #00bfff;
+    box-shadow: 0 0 12px #00bfff88;
+}
+
+.auth-btn {
+    margin-top: 10px;
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #00bfff, #6a5acd);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px #6a5acd88;
+}
+
+.error-message {
+    color: #ff4d4d;
+    text-align: center;
+    min-height: 20px;
+    font-weight: bold;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 25px;
+    color: #ccc;
+}
+
+.auth-switch a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
 

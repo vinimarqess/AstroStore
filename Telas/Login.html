@@ -2,18 +2,41 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Login - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>Login</h1>
+<body class="login-registro-bg">
+    <header class="header">
+        <a href="TelaInicial.html" style="text-decoration: none;"><span class="astro-title">ASTRO STORE</span></a>
+        <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">👤</a>
+    </header>
     <nav>
         <a href="TelaInicial.html">Início</a>
         <a href="catalogo.html">Catálogo</a>
         <a href="carrinho.html">Carrinho</a>
     </nav>
-    <!-- Formulário de login -->
+
+    <div class="auth-container">
+        <h2 class="auth-title">Fazer Login</h2>
+        <form class="auth-form" id="loginFormPage">
+            <div class="form-group">
+                <label for="login-email">E-mail</label>
+                <input type="email" id="login-email" placeholder="seuemail@exemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label for="login-senha">Senha</label>
+                <input type="password" id="login-senha" placeholder="Sua senha" required>
+            </div>
+            <div id="login-error-message" class="error-message"></div>
+            <button class="auth-btn" type="submit">Entrar</button>
+        </form>
+        <p class="auth-switch">Não tem uma conta? <a href="Registro.html">Registre-se aqui</a></p>
+    </div>
+
+    <footer style="position: fixed; bottom: 0; width: 100%;">
+        &copy; 2025 Astro Store. Todos os direitos reservados.
+    </footer>
     <script src="pronpt.js"></script>
 </body>
 </html>

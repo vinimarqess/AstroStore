@@ -2,20 +2,53 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Registro</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Registro - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
-    <script src="pronpt.js"></script>
 </head>
-<body>
-    <h1>Registrar</h1>
+<body class="login-registro-bg">
+    <header class="header">
+        <a href="TelaInicial.html" style="text-decoration: none;"><span class="astro-title">ASTRO STORE</span></a>
+        <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">👤</a>
+    </header>
     <nav>
         <a href="TelaInicial.html">Início</a>
         <a href="catalogo.html">Catálogo</a>
         <a href="carrinho.html">Carrinho</a>
     </nav>
-    <!-- Formulário de registro -->
+
+    <div class="auth-container">
+        <h2 class="auth-title">Criar Conta</h2>
+        <form class="auth-form" id="registerFormPage">
+            <div class="form-group">
+                <label for="reg-nome">Nome Completo</label>
+                <input type="text" id="reg-nome" placeholder="Seu nome" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-usuario">Nome de Usuário</label>
+                <input type="text" id="reg-usuario" placeholder="Ex: seu.usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-email">E-mail</label>
+                <input type="email" id="reg-email" placeholder="seuemail@exemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-senha">Senha</label>
+                <input type="password" id="reg-senha" placeholder="Crie uma senha forte" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-confirma-senha">Confirmar Senha</label>
+                <input type="password" id="reg-confirma-senha" placeholder="Repita a senha" required>
+            </div>
+            <div id="register-error-message" class="error-message"></div>
+            <button class="auth-btn" type="submit">Registrar</button>
+        </form>
+        <p class="auth-switch">Já tem uma conta? <a href="Login.html">Faça login</a></p>
+    </div>
+
+    <footer style="position: fixed; bottom: 0; width: 100%;">
+        &copy; 2025 Astro Store. Todos os direitos reservados.
+    </footer>
+    <script src="pronpt.js"></script>
 </body>
 </html>
-
-

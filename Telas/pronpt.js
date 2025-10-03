@@ -1,4 +1,6 @@
-// Produtos por categoria
+// VERSÃO FINAL COM PERFIL COMPLETO - 02/10/2025
+
+// ================= DADOS DOS PRODUTOS =================
 const produtos = {
     doces: [
         {
@@ -10,39 +12,7 @@ const produtos = {
     ]
 };
 
-// ================= Carrossel =================
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector(".carousel-track");
-  const items = document.querySelectorAll(".carousel-item");
-  const prevButton = document.querySelector(".prev");
-  const nextButton = document.querySelector(".next");
-
-  let currentIndex = 0;
-
-  function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
-
-  nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
-  });
-
-  prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        updateCarousel();
-  });
-
-  // autoplay a cada 4 segundos
-  setInterval(() => {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
-  }, 4000);
-});
-
-
 // ================= CARRINHO =================
-
 function getCarrinho() {
     return JSON.parse(localStorage.getItem('carrinho')) || [];
 }
@@ -63,6 +33,7 @@ function adicionarAoCarrinho(produto) {
     alert('Produto adicionado ao carrinho!');
 }
 
+// ================= CATÁLOGO E MODAL =================
 function mostrarProdutos(categoria) {
     const area = document.getElementById('products-area');
     if (!area) return;
@@ -81,12 +52,9 @@ function mostrarProdutos(categoria) {
                 </div>
             `;
         });
-        // Esconde as categorias e mostra os produtos
         const catList = document.getElementById('category-list');
         if (catList) catList.style.display = 'none';
         area.style.display = 'flex';
-
-        // Evento para abrir modal (se usar)
         document.querySelectorAll('.item-card').forEach(card => {
             card.addEventListener('click', function(e) {
                 if (e.target.classList.contains('buy-btn')) return;
@@ -102,7 +70,12 @@ function abrirModalProduto(produto) {
     document.getElementById('modal-img').src = produto.img;
     document.getElementById('modal-nome').textContent = produto.nome;
     document.getElementById('modal-desc').textContent = produto.desc;
-    document.getElementById('modal-preco').textContent = produto.preco;
+    const modalBuyBtn = document.getElementById('modal-produto').querySelector('.buy-btn');
+    modalBuyBtn.onclick = function(event) {
+        event.stopPropagation();
+        adicionarAoCarrinho(produto);
+        fecharModalProduto();
+    };
     document.getElementById('modal-produto').style.display = 'flex';
 }
 
@@ -110,59 +83,22 @@ function fecharModalProduto() {
     document.getElementById('modal-produto').style.display = 'none';
 }
 
-function renderCarrinho() {
-    const cartItems = document.getElementById('cart-items');
-    const cartSummary = document.getElementById('cart-summary');
-    const emptyBox = document.getElementById('empty-cart-box');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    cartItems.innerHTML = '';
-    let total = 0;
-    if (carrinho.length === 0) {
-        cartItems.classList.add('empty');
-        cartSummary.innerHTML = '';
-        emptyBox.style.display = 'block';
-        if (checkoutBtn) checkoutBtn.style.display = 'none';
-        return;
-    }
-    cartItems.classList.remove('empty');
-    emptyBox.style.display = 'none';
-    if (checkoutBtn) checkoutBtn.style.display = 'inline-block';
-    carrinho.forEach((item, idx) => {
-        total += item.preco * item.quantidade;
-        cartItems.innerHTML += `
-            <div class="cart-item">
-                <div class="item-info">
-                    <img class="item-img" src="${item.img}" alt="${item.nome}">
-                    <span class="item-name">${item.nome}</span>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="alterarQuantidade(${idx}, -1)">-</button>
-                        <span class="item-qty">${item.quantidade}</span>
-                        <button class="qty-btn" onclick="alterarQuantidade(${idx}, 1)">+</button>
-                    </div>
-                </div>
-                <div>
-                    <span class="item-price">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
-                    <button class="remove-btn" onclick="removerItem(${idx})">Remover</button>
-                </div>
-            </div>
-        `;
-    });
-    cartSummary.innerHTML = `Total: <strong>R$ ${total.toFixed(2)}</strong>`;
-}
-
-// ================= PERFIL =================
+// ================= PERFIL, LOGIN E REGISTRO =================
 function renderPerfil() {
     const container = document.getElementById('perfil-container');
     if (!container) return;
     const usuario = JSON.parse(localStorage.getItem('usuario'));
+
     if (!usuario) {
+        // Se não estiver logado, mostra botões de Login/Registro
         container.innerHTML = `
-            <h2>Perfil</h2>
-            <button class="perfil-btn" onclick="mostrarLogin()">Login</button>
-            <button class="perfil-btn" onclick="mostrarRegistro()">Registrar</button>
-            <div id="perfil-form-area"></div>
+            <h2>Área do Cliente</h2>
+            <p>Faça login ou crie uma conta para ver seus dados e histórico.</p>
+            <button class="perfil-btn" onclick="window.location.href='Login.html'">Fazer Login</button>
+            <button class="perfil-btn" onclick="window.location.href='Registro.html'">Registrar</button>
         `;
     } else {
+        // SE ESTIVER LOGADO, MOSTRA TODAS AS OPÇÕES (CORRIGIDO)
         container.innerHTML = `
             <h2>Bem-vindo, ${usuario.nome}!</h2>
             <button class="perfil-btn" onclick="mostrarConta()">Configurações de Conta</button>
@@ -172,34 +108,7 @@ function renderPerfil() {
             <button class="logout-btn perfil-btn" onclick="logout()">Logout</button>
             <div id="perfil-form-area"></div>
         `;
-        atualizarNomePerfilNav(usuario.usuario);
     }
-}
-
-function mostrarLogin() {
-    const area = document.getElementById('perfil-form-area');
-    if (!area) return;
-    area.innerHTML = `
-        <form class="perfil-form" onsubmit="login(event)">
-            <input type="email" id="login-email" placeholder="E-mail" required>
-            <input type="password" id="login-senha" placeholder="Senha" required>
-            <button class="perfil-btn" type="submit">Entrar</button>
-        </form>
-    `;
-}
-
-function mostrarRegistro() {
-    const area = document.getElementById('perfil-form-area');
-    if (!area) return;
-    area.innerHTML = `
-        <form class="perfil-form" onsubmit="registrar(event)">
-            <input type="text" id="reg-nome" placeholder="Nome completo" required>
-            <input type="text" id="reg-usuario" placeholder="Nome de usuário" required>
-            <input type="email" id="reg-email" placeholder="E-mail" required>
-            <input type="password" id="reg-senha" placeholder="Senha" required>
-            <button class="perfil-btn" type="submit">Registrar</button>
-        </form>
-    `;
 }
 
 function mostrarConta() {
@@ -215,69 +124,25 @@ function mostrarConta() {
             <input type="password" id="nova-senha" placeholder="Nova senha" required>
             <button class="perfil-btn" type="submit">Alterar Senha</button>
         </form>
-        <div class="perfil-form">
-            <label>
-                <input type="checkbox" id="notificacao" ${usuario.notificacao ? 'checked' : ''}>
-                Receber notificações por e-mail
-            </label>
-            <button class="perfil-btn" onclick="salvarNotificacao()" type="button">Salvar Preferência</button>
-        </div>
     `;
 }
 
 function mostrarHistorico() {
     const area = document.getElementById('perfil-form-area');
     if (!area) return;
-    area.innerHTML = `
-        <div class="perfil-form">
-            <p>Histórico de compras (exemplo):</p>
-            <ul>
-                <li>Compra 1 - 01/09/2025</li>
-                <li>Compra 2 - 15/09/2025</li>
-                <li>Compra 3 - 28/09/2025</li>
-            </ul>
-        </div>
-    `;
+    area.innerHTML = `<div class="perfil-form"><p>Nenhum histórico de compras encontrado.</p></div>`;
 }
 
 function mostrarContato() {
     const area = document.getElementById('perfil-form-area');
     if (!area) return;
-    area.innerHTML = `
-        <div class="perfil-form">
-            <p>Entre em contato com a loja:</p>
-            <p>Email: <a href="mailto:contato@astrostore.com.br">contato@astrostore.com.br</a></p>
-            <p>WhatsApp: <a href="https://wa.me/5599999999999" target="_blank">(99) 99999-9999</a></p>
-        </div>
-    `;
+    area.innerHTML = `<div class="perfil-form"><p>Email: contato@astrostore.com</p></div>`;
 }
 
-function registrar(e) {
-    e.preventDefault();
-    const nome = document.getElementById('reg-nome').value;
-    const usuario = document.getElementById('reg-usuario').value;
-    const email = document.getElementById('reg-email').value;
-    const senha = document.getElementById('reg-senha').value;
-    localStorage.setItem('usuario', JSON.stringify({ nome, usuario, email, senha, notificacao: false }));
-    renderPerfil();
-}
-
-function login(e) {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const senha = document.getElementById('login-senha').value;
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    if (usuario && usuario.email === email && usuario.senha === senha) {
-        renderPerfil();
-    } else {
-        alert('E-mail ou senha incorretos!');
-    }
-}
-
-function logout() {
-    localStorage.removeItem('usuario');
-    renderPerfil();
-    atualizarNomePerfilNav(null);
+function mostrarPagamentos() {
+    const area = document.getElementById('perfil-form-area');
+    if (!area) return;
+    area.innerHTML = `<div class="perfil-form"><p>Nenhum método de pagamento salvo.</p></div>`;
 }
 
 function mudarNome(e) {
@@ -286,7 +151,8 @@ function mudarNome(e) {
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     usuario.nome = novoNome;
     localStorage.setItem('usuario', JSON.stringify(usuario));
-    renderPerfil();
+    renderPerfil(); // Re-renderiza o perfil para mostrar o nome atualizado no "Bem-vindo"
+    alert('Nome alterado com sucesso!');
 }
 
 function mudarSenha(e) {
@@ -296,34 +162,28 @@ function mudarSenha(e) {
     usuario.senha = novaSenha;
     localStorage.setItem('usuario', JSON.stringify(usuario));
     alert('Senha alterada com sucesso!');
-    renderPerfil();
+    document.getElementById('perfil-form-area').innerHTML = ''; // Limpa a área do formulário
 }
 
-function salvarNotificacao() {
-    let usuario = JSON.parse(localStorage.getItem('usuario'));
-    usuario.notificacao = document.getElementById('notificacao').checked;
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-    alert('Preferência de notificação salva!');
+function registrarUsuario(nome, usuario, email, senha) {
+    const novoUsuario = { nome, usuario, email, senha, notificacao: false };
+    localStorage.setItem('usuario', JSON.stringify(novoUsuario));
+    return true;
 }
 
-function mostrarPagamentos() {
-    const area = document.getElementById('perfil-form-area');
-    if (!area) return;
-    area.innerHTML = `
-        <div class="perfil-form">
-            <h3 style="color:#00bfff;margin-bottom:10px;">Métodos de Pagamento</h3>
-            <p style="color:#ffb300;font-size:1rem;margin-bottom:10px;">
-                Desculpe, no momento só aceitamos pagamento via <strong>Pix à vista</strong>.
-            </p>
-            <div style="background:#fff;border-radius:12px;padding:18px 0;box-shadow:0 2px 12px #0002;width:100%;max-width:320px;display:flex;flex-direction:column;align-items:center;margin:0 auto;">
-                <img src="https://logodownload.org/wp-content/uploads/2020/02/pix-bc-logo-0.png" alt="Pix" style="width:90px;height:auto;margin-bottom:10px;">
-                <span style="font-size:1.1rem;color:#232357;font-weight:bold;">Pagamento via Pix</span>
-            </div>
-        </div>
-    `;
+function loginUsuario(email, senha) {
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (usuario && usuario.email === email && usuario.senha === senha) {
+        return true;
+    }
+    return false;
 }
 
-// Função para atualizar o nome de usuário abaixo do ícone de perfil na barra de navegação
+function logout() {
+    localStorage.removeItem('usuario');
+    renderPerfil(); // Re-renderiza para mostrar os botões de login/registro
+}
+
 function atualizarNomePerfilNav(nomeUsuario) {
     let perfilNav = document.getElementById('perfil-link');
     let nomeSpan = document.getElementById('perfil-nome-nav');
@@ -331,126 +191,96 @@ function atualizarNomePerfilNav(nomeUsuario) {
     if (!nomeSpan) {
         nomeSpan = document.createElement('span');
         nomeSpan.id = 'perfil-nome-nav';
-        nomeSpan.style.display = 'block';
-        nomeSpan.style.fontSize = '0.85rem';
-        nomeSpan.style.color = '#fff';
-        nomeSpan.style.lineHeight = '1.1';
-        nomeSpan.style.marginTop = '2px';
-        nomeSpan.style.fontWeight = 'bold';
-        nomeSpan.style.letterSpacing = '0.5px';
-        nomeSpan.style.textShadow = '0 1px 4px #0008';
         perfilNav.appendChild(nomeSpan);
     }
-    if (nomeUsuario) {
-        nomeSpan.textContent = nomeUsuario;
-        nomeSpan.style.display = 'block';
-    } else {
-        nomeSpan.textContent = '';
-        nomeSpan.style.display = 'none';
-    }
+    nomeSpan.textContent = nomeUsuario || '';
 }
 
-// Função para animar o título da loja
-function animarTituloAstro() {
-    const titulo = document.querySelector('.astro-title');
-    if (!titulo) return;
-    titulo.classList.remove('animar-titulo');
-    // Força o reflow para reiniciar a animação
-    void titulo.offsetWidth;
-    titulo.classList.add('animar-titulo');
-}
-
-// Anima ao carregar a página
-document.addEventListener('DOMContentLoaded', animarTituloAstro);
-
-// Anima ao clicar em qualquer link da barra de navegação
+// ================= INICIALIZADOR PRINCIPAL =================
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            animarTituloAstro();
-        });
-    });
-});
-
-// Inicialização automática do perfil ao carregar a página
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicialização do perfil (só executa se existir o container)
-    if (document.getElementById('perfil-container')) {
-        renderPerfil();
-        const usuario = JSON.parse(localStorage.getItem('usuario'));
-        if (usuario && usuario.usuario) {
-            atualizarNomePerfilNav(usuario.usuario);
+    
+    // --- CARROSSEL ---
+    const track = document.querySelector(".carousel-track");
+    if (track) {
+        const items = document.querySelectorAll(".carousel-item");
+        const prevButton = document.querySelector(".prev");
+        const nextButton = document.querySelector(".next");
+        if (prevButton && nextButton && items.length > 0) {
+            let currentIndex = 0;
+            function updateCarousel() { track.style.transform = `translateX(-${currentIndex * 100}%)`; }
+            nextButton.addEventListener("click", () => { currentIndex = (currentIndex + 1) % items.length; updateCarousel(); });
+            prevButton.addEventListener("click", () => { currentIndex = (currentIndex - 1 + items.length) % items.length; updateCarousel(); });
+            setInterval(() => { currentIndex = (currentIndex + 1) % items.length; updateCarousel(); }, 4000);
         }
     }
 
-    // Inicialização do modal de produto (só executa se existir o modal)
-    const closeModalBtn = document.getElementById('close-modal');
-    const modalProduto = document.getElementById('modal-produto');
-    if (closeModalBtn && modalProduto) {
-        closeModalBtn.addEventListener('click', fecharModalProduto);
-        modalProduto.addEventListener('click', function(e) {
-            if (e.target === this) fecharModalProduto();
+    // --- PÁGINA DE LOGIN ---
+    const loginForm = document.getElementById('loginFormPage');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const senha = document.getElementById('login-senha').value;
+            const errorDiv = document.getElementById('login-error-message');
+            if (loginUsuario(email, senha)) {
+                alert('Login bem-sucedido!');
+                window.location.href = 'perfil.html';
+            } else {
+                errorDiv.textContent = 'E-mail ou senha incorretos.';
+            }
         });
     }
 
-    // Inicialização do catálogo (só executa se existir categoria)
-    const categorias = document.querySelectorAll('.category-card');
-    if (categorias.length) {
-        categorias.forEach(card => {
+    // --- PÁGINA DE REGISTRO ---
+    const registerForm = document.getElementById('registerFormPage');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('reg-nome').value;
+            const usuario = document.getElementById('reg-usuario').value;
+            const email = document.getElementById('reg-email').value;
+            const senha = document.getElementById('reg-senha').value;
+            const confirmaSenha = document.getElementById('reg-confirma-senha').value;
+            const errorDiv = document.getElementById('register-error-message');
+            errorDiv.textContent = '';
+            if (senha.length < 6) {
+                errorDiv.textContent = 'A senha deve ter no mínimo 6 caracteres.';
+                return;
+            }
+            if (senha !== confirmaSenha) {
+                errorDiv.textContent = 'As senhas não coincidem!';
+                return;
+            }
+            if (registrarUsuario(nome, usuario, email, senha)) {
+                alert('Conta criada com sucesso! Você será redirecionado para o login.');
+                window.location.href = 'Login.html';
+            }
+        });
+    }
+
+    // --- PÁGINA DE PERFIL ---
+    if (document.getElementById('perfil-container')) {
+        renderPerfil();
+    }
+    
+    // --- PÁGINA DE CATÁLOGO ---
+    if (document.querySelector('.catalog-container')) {
+        document.querySelectorAll('.category-card').forEach(card => {
             card.addEventListener('click', function() {
                 mostrarProdutos(this.dataset.category);
             });
         });
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalProduto = document.getElementById('modal-produto');
+        if (closeModalBtn && modalProduto) {
+            closeModalBtn.addEventListener('click', fecharModalProduto);
+            modalProduto.addEventListener('click', function(e) { if (e.target === this) fecharModalProduto(); });
+        }
     }
-});
-
-
-
-// Telas de registro e login (Nathan)
-// Adiciona os novos listeners dentro do 'DOMContentLoaded' para garantir que a página carregou
-document.addEventListener('DOMContentLoaded', function() {
     
-    // Lógica para o formulário de REGISTRO
-    const registerForm = document.getElementById('registerForm');
-    if(registerForm) {
-        registerForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio do formulário
-
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const errorMessageDiv = document.getElementById('errorMessage');
-
-            // Limpa erros anteriores
-            errorMessageDiv.textContent = ''; 
-
-            if (password.length < 6) {
-                errorMessageDiv.textContent = 'A senha deve ter no mínimo 6 caracteres.';
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                errorMessageDiv.textContent = 'As senhas não coincidem!';
-                return;
-            }
-
-            // Se tudo estiver certo
-            alert('Conta criada com sucesso!');
-            window.location.href = 'login.html'; // Redireciona para a página de login
-        });
+    // --- ATUALIZA NOME DE USUÁRIO NA NAVEGAÇÃO (EM TODAS AS PÁGINAS) ---
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioLogado) {
+        atualizarNomePerfilNav(usuarioLogado.usuario);
     }
-
-    // Lógica para o formulário de LOGIN
-    const loginForm = document.getElementById('loginForm');
-    if(loginForm) {
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio do formulário
-            
-            const email = document.getElementById('loginEmail').value;
-
-            // Simulação de login
-            alert(`Login bem-sucedido! Bem-vindo(a), ${email}!`);
-            window.location.href = 'TelaInicial.html'; // Redireciona para a página inicial
-        });
-    }
-
 });
