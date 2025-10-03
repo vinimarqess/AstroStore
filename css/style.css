@@ -1021,10 +1021,25 @@ body.catalogo-bg {
     box-shadow: 0 2px 8px #0002;
 }
 
-produto_area {
+.produto_area {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
     width: 100%;
+}
+
+.produto_info{
+    position: absolute;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.rodape{
+    min-height: 50vh; 
+    padding: 80px 40px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
 }

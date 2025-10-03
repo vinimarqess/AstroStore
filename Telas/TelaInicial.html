@@ -88,21 +88,16 @@
             
             <div class = "bloco_produto">
                 <img class = "imagem_item" src="https://http2.mlstatic.com/D_NQ_NP_844675-MLA84177545292_052025-O.webp" alt="Balinha Icekiss">
-                    <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][0]); event.stopPropagation();">Comprar</button>
+                <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][0]); event.stopPropagation();">Comprar</button>
             </div>
 
             <div class = "bloco_produto">
                 <img class = "imagem_item" src="https://phygital-files.mercafacil.com/gui-box/uploads/produto/bala_peccin_menta_un_09f53a4e-30cf-40e9-8f9a-e37632d266ca.jpeg" alt="Bala de Menta Peccin">
-                        <h2 id="modal-nome"></h2>
-                        <p id="modal-preco"></p>
                 <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][1]); event.stopPropagation();">Comprar</button>
             </div>
             
             <div class = "bloco_produto">
                 <img class = "imagem_item" src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
-                        <h2 id="modal-nome"></h2>
-                        <p id="modal-desc"></p>
-                        <p id="modal-preco"></p>
                     <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][2]); event.stopPropagation();">Comprar</button>
             </div>
             
@@ -130,44 +125,30 @@
                     <img class = "imagem_item" src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
                     <button class="buy-btn" onclick="adicionarAoCarrinho(produtos['doces'][2]); event.stopPropagation();">Comprar</button>
             </div>
+            
         </section>
         <h1 class="grade-title">...</h1>
 
-        <div class="catalog-container">
-        <div class="catalog-title">Categorias</div>
-        <div class="category-list" id="category-list">
-            <div class="category-card" data-category="doces">
-                <span class="category-icon">🍬</span>
-                <span class="category-name">Doces</span>
-            </div>
-            <!-- Adicione mais categorias aqui -->
-        </div>
-        <div class="products-area" id="products-area" style="display:none;">
-            <!-- Os produtos aparecerão aqui -->
-        </div>
-    </div>
 
-         <!-- Modal de informações do produto -->
 
-    </div>
     
     <!-- Seção adicional para empurrar o footer para baixo -->
-    <section style="min-height: 100vh; padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h2 style="color: #00bfff; font-size: 2.2rem; margin-bottom: 40px; text-align: center;">Por que escolher a Astro Store?</h2>
+    <section class="rodape">
+        <h2 style="color: #00bfff; font-size: 2.2rem; margin-bottom: 20px; text-align: center;">Por que escolher a Astro Store?</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; width: 100%;">
             <div style="background: rgba(24,24,72,0.8); padding: 30px; border-radius: 15px; text-align: center;">
-                <h3 style="color: #00bfff; margin-bottom: 15px;">🚀 Inovação</h3>
+                <h3 style="color: #00bfff; margin-bottom: 15px;">Inovação</h3>
                 <p style="color: #fff; opacity: 0.9;">Sempre na vanguarda da tecnologia com os produtos mais modernos do mercado.</p>
             </div>
             
             <div style="background: rgba(24,24,72,0.8); padding: 30px; border-radius: 15px; text-align: center;">
-                <h3 style="color: #00bfff; margin-bottom: 15px;">🌍 Sustentabilidade</h3>
+                <h3 style="color: #00bfff; margin-bottom: 15px;">Sustentabilidade</h3>
                 <p style="color: #fff; opacity: 0.9;">Comprometidos com o meio ambiente e práticas sustentáveis.</p>
             </div>
             
             <div style="background: rgba(24,24,72,0.8); padding: 30px; border-radius: 15px; text-align: center;">
-                <h3 style="color: #00bfff; margin-bottom: 15px;">💯 Qualidade</h3>
+                <h3 style="color: #00bfff; margin-bottom: 15px;">Qualidade</h3>
                 <p style="color: #fff; opacity: 0.9;">Produtos testados e aprovados pela nossa equipe de especialistas.</p>
             </div>
         </div>
