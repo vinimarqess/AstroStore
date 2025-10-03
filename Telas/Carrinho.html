@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
 </head>
-<body class="carrinho-bg">
+<body class="carrinho-bg" style="min-height: 100vh; display: flex; flex-direction: column;">
     <header class="header">
-        <span class="astro-title">ASTRO STORE</span>
-        <form class="search-bar" action="#" method="get">
-            <input type="text" placeholder="Buscar produtos..." name="q">
+        <a href="TelaInicial.html" class="astro-title-link">
+            <span class="astro-title">ASTRO STORE</span>
+        </a>
+        <form class="search-bar" onsubmit="realizarPesquisa(event)">
+            <input type="text" id="search-input" placeholder="Buscar produtos..." name="q">
             <button type="submit">🔍</button>
         </form>
             <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">
@@ -23,7 +25,7 @@
         <a href="carrinho.html">Carrinho</a>
             <!-- O nome de usuário será inserido via JS -->
     </nav>
-    <div class="cart-container">
+    <div class="cart-container" style="flex: 1;">
         <div class="cart-title">Seu Carrinho</div>
         <div class="cart-items" id="cart-items">
             <!-- Produtos do carrinho aparecem aqui -->
@@ -39,7 +41,7 @@
         </div>
         <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='pagamento.html'">Ir para Pagamento</button>
     </div>
-    <footer>
+    <footer style="position: static !important; width: 100%; background: rgba(24,24,72,0.95); color: #fff; text-align: center; padding: 15px 0; border-top: 2px solid #00bfff; box-shadow: 0 -2px 10px rgba(0, 191, 255, 0.2); margin-top: auto !important;">
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
     <script src="pronpt.js"></script>
@@ -111,6 +113,54 @@
         }
 
         document.addEventListener('DOMContentLoaded', renderCarrinho);
+
+        // Funções para pesquisa
+        function realizarPesquisa(event) {
+            event.preventDefault();
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) return;
+            const resultados = buscarProdutos(query);
+            exibirResultadosPesquisa(resultados);
+        }
+
+        function buscarProdutos(query) {
+            let carrinho = getCarrinho();
+            return carrinho.filter(item => item.nome.toLowerCase().includes(query.toLowerCase()));
+        }
+
+        function exibirResultadosPesquisa(resultados) {
+            const modal = document.getElementById('modal-pesquisa');
+            const conteudo = document.getElementById('resultados-pesquisa');
+            conteudo.innerHTML = '';
+            if (resultados.length === 0) {
+                conteudo.innerHTML = '<p>Nenhum produto encontrado.</p>';
+            } else {
+                resultados.forEach(item => {
+                    conteudo.innerHTML += `
+                        <div class="resultado-item">
+                            <img src="${item.img}" alt="${item.nome}" class="resultado-img">
+                            <div class="resultado-info">
+                                <span class="resultado-nome">${item.nome}</span>
+                                <span class="resultado-preco">R$ ${item.preco.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            modal.style.display = 'block';
+        }
+
+        function fecharModalPesquisa() {
+            const modal = document.getElementById('modal-pesquisa');
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal-pesquisa');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>

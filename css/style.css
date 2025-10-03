@@ -13,11 +13,13 @@ body, .astro-title {
 /* ===================== FUNDO ANIMADO ===================== */
 body {
     min-height: 100vh;
-    padding-bottom: 60px;
+    padding-bottom: 0;
     background: linear-gradient(-45deg, #232357, #6a5acd, #00bfff, #8a2be2);
     background-size: 400% 400%;
     animation: gradientBG 12s ease infinite;
     color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 @keyframes gradientBG {
     0% {background-position: 0% 50%;}
@@ -34,6 +36,17 @@ body {
     background: rgba(24,24,72,0.95);
     box-shadow: 0 2px 16px #0004;
     backdrop-filter: blur(2px);
+}
+
+.astro-title-link {
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.astro-title-link:hover .astro-title {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px #00bfff66);
 }
 
 .astro-title {
@@ -324,18 +337,17 @@ nav a:hover::before, nav a:focus::before {
 
 /* ===================== FOOTER (TODAS AS TELAS) ===================== */
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
     background: rgba(24,24,72,0.95);
     color: #fff;
     text-align: center;
-    padding: 14px 0;
+    padding: 15px 0;
     font-size: 1rem;
     letter-spacing: 1px;
-    box-shadow: 0 -2px 8px #0002;
+    box-shadow: 0 -2px 10px rgba(0, 191, 255, 0.2);
     backdrop-filter: blur(2px);
+    border-top: 2px solid #00bfff;
+    margin-top: auto;
 }
 
 /* ===================== CATÁLOGO ===================== */
@@ -711,152 +723,269 @@ body.catalogo-bg {
 
 .carousel {
     position: relative;
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    overflow: visible;
+    border-radius: 25px;
+    background: linear-gradient(145deg, rgba(24,24,72,0.8), rgba(35,35,87,0.9));
+    box-shadow: 
+        0 20px 40px rgba(0, 191, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(138, 43, 226, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 191, 255, 0.3);
+    padding: 30px 80px;
+}
+
+.carousel::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00bfff, #6a5acd, #8a2be2, #00bfff);
+    background-size: 300% 300%;
+    border-radius: 25px;
+    z-index: -1;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .carousel-container {
     overflow: hidden;
+    border-radius: 20px;
+    position: relative;
 }
 
 .carousel-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
 }
 
 .carousel-item {
     min-width: 100%;
     text-align: center;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    padding: 20px;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-item:hover {
+    transform: translateY(-10px) scale(1.02);
 }
 
 .carousel-item img {
-    width: 250px;
-    height: auto;
-    border-radius: 10px;
+    width: 300px;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
+    padding: 20px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        0 5px 15px rgba(0, 191, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item img::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg) translate(-50%, -50%);
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+.carousel-item:hover img {
+    transform: rotateY(5deg) rotateX(5deg);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 10px 25px rgba(0, 191, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.carousel-item:hover img::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+.carousel-item h3 {
+    color: #00bfff;
+    margin: 20px 0 10px 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 
+        0 0 10px rgba(0, 191, 255, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    position: relative;
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 
+            0 0 10px rgba(0, 191, 255, 0.5),
+            0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        text-shadow: 
+            0 0 20px rgba(0, 191, 255, 0.8),
+            0 0 30px rgba(0, 191, 255, 0.4),
+            0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.carousel-item p {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0;
+    background: linear-gradient(90deg, #6a5acd, #00bfff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    position: relative;
+}
+
+.carousel-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 60%, rgba(0, 191, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.carousel-item:hover::after {
+    opacity: 1;
 }
 
 .prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
+    background: linear-gradient(145deg, rgba(0, 191, 255, 0.8), rgba(106, 90, 205, 0.8));
     color: white;
     border: none;
-    font-size: 2rem;
-    width: 50px;   
-    height: 50px;
+    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
     cursor: pointer;
     border-radius: 50%;
-}
-
-.prev { left: 0px; }
-.next { right: 0px; }
-
-/* ================Lista de Itens================= */
-
-/* ===================== TELAS DE LOGIN E REGISTRO ===================== */
-
-.login-registro-bg {
+    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 191, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
 
-.auth-container {
-    max-width: 450px;
-    width: 90%;
-    margin: 40px auto;
-    background: rgba(24, 24, 72, 0.92);
-    border-radius: 18px;
-    box-shadow: 0 4px 32px #0006;
-    padding: 30px 40px;
-    color: #fff;
-    animation: fadeInUp 0.7s cubic-bezier(.77,0,.18,1);
-    flex-grow: 1;
+.prev:hover, .next:hover {
+    transform: translateY(-50%) scale(1.1);
+    background: linear-gradient(145deg, rgba(0, 191, 255, 1), rgba(106, 90, 205, 1));
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 191, 255, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
-.auth-title {
-    text-align: center;
-    font-size: 2.2rem;
-    color: #00bfff;
-    margin-bottom: 25px;
-    text-shadow: 0 2px 8px #00bfff88;
+.prev:active, .next:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+.prev { 
+    left: -50px;
+    animation: pulseLeft 3s ease-in-out infinite;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.next { 
+    right: -50px;
+    animation: pulseRight 3s ease-in-out infinite;
 }
 
-.form-group label {
-    font-size: 1rem;
-    color: #ccc;
-    padding-left: 5px;
+@keyframes pulseLeft {
+    0%, 100% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), -10px 0 20px rgba(0, 191, 255, 0.3); }
+    50% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), -15px 0 25px rgba(0, 191, 255, 0.5); }
 }
 
-.form-group input {
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid #6a5acd;
-    background: #232357;
-    color: #fff;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+@keyframes pulseRight {
+    0%, 100% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 10px 0 20px rgba(0, 191, 255, 0.3); }
+    50% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 15px 0 25px rgba(0, 191, 255, 0.5); }
 }
 
-.form-group input:focus {
-    outline: none;
-    border-color: #00bfff;
-    box-shadow: 0 0 12px #00bfff88;
+/* Indicadores de slide */
+.carousel::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.5), transparent);
+    border-radius: 2px;
+    animation: slideIndicator 2s ease-in-out infinite;
 }
 
-.auth-btn {
-    margin-top: 10px;
-    padding: 12px 24px;
-    background: linear-gradient(90deg, #00bfff, #6a5acd);
-    color: #fff;
-    border: none;
+@keyframes slideIndicator {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Efeito de partículas */
+.carousel-item:hover {
+    position: relative;
+}
+
+.carousel-item:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 40% 40%, rgba(106, 90, 205, 0.3) 1px, transparent 1px);
+    background-size: 50px 50px, 30px 30px, 70px 70px;
+    animation: particles 4s linear infinite;
+    pointer-events: none;
     border-radius: 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.auth-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px #6a5acd88;
-}
-
-.error-message {
-    color: #ff4d4d;
-    text-align: center;
-    min-height: 20px;
-    font-weight: bold;
-}
-
-.auth-switch {
-    text-align: center;
-    margin-top: 25px;
-    color: #ccc;
-}
-
-.auth-switch a {
-    color: #00bfff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.auth-switch a:hover {
-    text-decoration: underline;
+@keyframes particles {
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 50px 50px, 30px 30px, 70px 70px; }
 }
 
 

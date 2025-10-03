@@ -6,11 +6,13 @@
     <title>Astro Store - Início</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
     <header class="header">
-        <span class="astro-title">ASTRO STORE</span>
-        <form class="search-bar" action="#" method="get">
-            <input type="text" placeholder="Buscar produtos..." name="q">
+        <a href="TelaInicial.html" class="astro-title-link">
+            <span class="astro-title">ASTRO STORE</span>
+        </a>
+        <form class="search-bar" onsubmit="realizarPesquisa(event)">
+            <input type="text" id="search-input" placeholder="Buscar produtos..." name="q">
             <button type="submit">🔍</button>
         </form>
         <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">
@@ -18,13 +20,22 @@
         </a>
     </header>
     
+    <!-- Modal de resultados da pesquisa -->
+    <div id="modal-pesquisa" class="modal-produto" style="display: none;">
+        <div class="modal-content" style="max-width: 600px; width: 90vw;">
+            <span class="close-modal" onclick="fecharModalPesquisa()">&times;</span>
+            <h2 style="color: #00bfff; margin-bottom: 20px;">Resultados da Pesquisa</h2>
+            <div id="resultados-pesquisa"></div>
+        </div>
+    </div>
+
     <nav>
         <a href="TelaInicial.html">Início</a>
         <a href="catalogo.html">Catálogo</a>
         <a href="carrinho.html">Carrinho</a>
     </nav>
 
-    <h1 class="destaques-titulo">Destaques do Mês</h1>
+    <h1 class="destaques-titulo">✨ Destaques Galácticos do Mês ✨</h1>
     <!-- Carrossel -->
     <section class="destaques">
         <div class="carousel">
@@ -32,19 +43,25 @@
 
             <div class="carousel-container">
                 <div class="carousel-track">
-                    <!-- Slide 1 -->
-                    <div class="carousel-item">
-                        <img src="https://w7.pngwing.com/pngs/454/1021/png-transparent-consumer-electronics-gadget-advanced-electronics-electronic-component-others-electronics-laptop-electronic-device.png" alt="Produto 1">
+                    <!-- Slide 1 - Balinha Icekiss -->
+                    <div class="carousel-item" onclick="mostrarProdutoCarrossel(0)">
+                        <img src="https://http2.mlstatic.com/D_NQ_NP_844675-MLA84177545292_052025-O.webp" alt="Balinha Icekiss">
+                        <h3>🌟 Balinha Icekiss</h3>
+                        <p>R$ 2,50</p>
                     </div>
 
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <img src="https://img.cdndsgni.com/preview/10001870.jpg" alt="Produto 2">
+                    <!-- Slide 2 - Bala de Menta -->
+                    <div class="carousel-item" onclick="mostrarProdutoCarrossel(1)">
+                        <img src="https://phygital-files.mercafacil.com/gui-box/uploads/produto/bala_peccin_menta_un_09f53a4e-30cf-40e9-8f9a-e37632d266ca.jpeg" alt="Bala de Menta Peccin">
+                        <h3>🍃 Bala de Menta</h3>
+                        <p>R$ 1,50</p>
                     </div>
 
-                    <!-- Slide 3 -->
-                    <div class="carousel-item">
-                        <img src="https://cdn3.pixelcut.app/7/15/transparent_background_hero_3f096cbc60.jpg" alt="Produto 3">
+                    <!-- Slide 3 - Balinha Chita -->
+                    <div class="carousel-item" onclick="mostrarProdutoCarrossel(2)">
+                        <img src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/50e8404b-5819-4e08-8968-077f4f55d43e/ImagensProdutos/64b54d731409256b3728d79d_600x600.jpeg" alt="Balinha Chita">
+                        <h3>🚀 Balinha Chita</h3>
+                        <p>R$ 1,80</p>
                     </div>
                 </div>
             </div>
@@ -52,6 +69,18 @@
             <button class="next">❯</button>
         </div>
     </section>
+
+    <!-- Modal para mostrar produto do carrossel -->
+    <div id="modal-produto-carrossel" class="modal-produto" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModalCarrossel()">&times;</span>
+            <img id="modal-img-carrossel" class="modal-img" src="" alt="">
+            <h2 id="modal-nome-carrossel"></h2>
+            <p id="modal-desc-carrossel"></p>
+            <p id="modal-preco-carrossel" style="font-size: 1.3rem; font-weight: bold; color: #00bfff;"></p>
+            <button class="buy-btn" id="modal-buy-btn-carrossel">Adicionar ao Carrinho</button>
+        </div>
+    </div>
 
     <div class="main-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;">
         <section style="text-align:center;max-width:600px;">
@@ -80,9 +109,46 @@
         </section>
 
     </div>
-    <footer>
+    
+    <!-- Seção adicional para empurrar o footer para baixo -->
+    <section style="min-height: 100vh; padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h2 style="color: #00bfff; font-size: 2.2rem; margin-bottom: 40px; text-align: center;">Por que escolher a Astro Store?</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; width: 100%;">
+            <div style="background: rgba(24,24,72,0.8); padding: 30px; border-radius: 15px; text-align: center;">
+                <h3 style="color: #00bfff; margin-bottom: 15px;">🚀 Inovação</h3>
+                <p style="color: #fff; opacity: 0.9;">Sempre na vanguarda da tecnologia com os produtos mais modernos do mercado.</p>
+            </div>
+            
+            <div style="background: rgba(24,24,72,0.8); padding: 30px; border-radius: 15px; text-align: center;">
+                <h3 style="color: #00bfff; margin-bottom: 15px;">🌍 Sustentabilidade</h3>
+                <p style="color: #fff; opacity: 0.9;">Comprometidos com o meio ambiente e práticas sustentáveis.</p>
+            </div>
+            
+            <div style="background: rgba(24,24,72,0.8); padding: 30px; border-radius: 15px; text-align: center;">
+                <h3 style="color: #00bfff; margin-bottom: 15px;">💯 Qualidade</h3>
+                <p style="color: #fff; opacity: 0.9;">Produtos testados e aprovados pela nossa equipe de especialistas.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mais uma seção para garantir que o footer fique bem embaixo -->
+    <section style="min-height: 50vh; padding: 40px; display: flex; justify-content: center; align-items: center;">
+        <div style="text-align: center; max-width: 600px;">
+            <h2 style="color: #00bfff; margin-bottom: 20px;">Pronto para começar?</h2>
+            <p style="color: #fff; opacity: 0.9; font-size: 1.1rem; margin-bottom: 30px;">
+                Explore nosso catálogo completo e descubra produtos incríveis que vão transformar sua experiência de compra.
+            </p>
+            <a href="catalogo.html" style="display: inline-block; background: linear-gradient(90deg, #00bfff, #6a5acd); color: #fff; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: transform 0.3s;">
+                Ver Catálogo Completo
+            </a>
+        </div>
+    </section>
+    
+    <footer style="position: static !important; width: 100%; background: rgba(24,24,72,0.95); color: #fff; text-align: center; padding: 15px 0; border-top: 2px solid #00bfff; box-shadow: 0 -2px 10px rgba(0, 191, 255, 0.2); margin-top: auto !important;">
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
+    
     <script src="pronpt.js"></script>
 </body>
 </html>
