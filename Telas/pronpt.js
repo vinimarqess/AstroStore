@@ -388,7 +388,6 @@ document.addEventListener('DOMContentLoaded', function() {
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const nome = document.getElementById('reg-nome').value;
-            const usuario = document.getElementById('reg-usuario').value;
             const email = document.getElementById('reg-email').value;
             const senha = document.getElementById('reg-senha').value;
             const confirmaSenha = document.getElementById('reg-confirma-senha').value;
