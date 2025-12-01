@@ -127,12 +127,12 @@ function renderPerfil() {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
 
     if (!usuario) {
-        // Se não estiver logado, mostra botões de Login/Registro
+        // CORREÇÃO: Caminho relativo (mesma pasta) e extensão correta (.php)
         container.innerHTML = `
             <h2>Área do Cliente</h2>
             <p>Faça login ou crie uma conta para ver seus dados e histórico.</p>
-            <button class="perfil-btn" onclick="window.location.href='Login.html'">Fazer Login</button>
-            <button class="perfil-btn" onclick="window.location.href='Registro.html'">Registrar</button>
+            <button class="perfil-btn" onclick="window.location.href='Login.php'">Fazer Login</button>
+            <button class="perfil-btn" onclick="window.location.href='Registro.php'">Registrar</button>
         `;
     } else {
         // SE ESTIVER LOGADO, MOSTRA TODAS AS OPÇÕES (CORRIGIDO)
@@ -202,19 +202,6 @@ function mudarSenha(e) {
     document.getElementById('perfil-form-area').innerHTML = ''; // Limpa a área do formulário
 }
 
-function registrarUsuario(nome, usuario, email, senha) {
-    const novoUsuario = { nome, usuario, email, senha, notificacao: false };
-    localStorage.setItem('usuario', JSON.stringify(novoUsuario));
-    return true;
-}
-
-function loginUsuario(email, senha) {
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    if (usuario && usuario.email === email && usuario.senha === senha) {
-        return true;
-    }
-    return false;
-}
 
 function logout() {
     localStorage.removeItem('usuario');
@@ -363,49 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
             prevButton.addEventListener("click", () => { currentIndex = (currentIndex - 1 + items.length) % items.length; updateCarousel(); });
             setInterval(() => { currentIndex = (currentIndex + 1) % items.length; updateCarousel(); }, 4000);
         }
-    }
-
-    // --- PÁGINA DE LOGIN ---
-    const loginForm = document.getElementById('loginFormPage');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const senha = document.getElementById('login-senha').value;
-            const errorDiv = document.getElementById('login-error-message');
-            if (loginUsuario(email, senha)) {
-                alert('Login bem-sucedido!');
-                window.location.href = 'perfil.html';
-            } else {
-                errorDiv.textContent = 'E-mail ou senha incorretos.';
-            }
-        });
-    }
-
-    // --- PÁGINA DE REGISTRO ---
-    const registerForm = document.getElementById('registerFormPage');
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nome = document.getElementById('reg-nome').value;
-            const email = document.getElementById('reg-email').value;
-            const senha = document.getElementById('reg-senha').value;
-            const confirmaSenha = document.getElementById('reg-confirma-senha').value;
-            const errorDiv = document.getElementById('register-error-message');
-            errorDiv.textContent = '';
-            if (senha.length < 6) {
-                errorDiv.textContent = 'A senha deve ter no mínimo 6 caracteres.';
-                return;
-            }
-            if (senha !== confirmaSenha) {
-                errorDiv.textContent = 'As senhas não coincidem!';
-                return;
-            }
-            if (registrarUsuario(nome, usuario, email, senha)) {
-                alert('Conta criada com sucesso! Você será redirecionado para o login.');
-                window.location.href = 'Login.html';
-            }
-        });
     }
 
     // --- PÁGINA DE PERFIL ---

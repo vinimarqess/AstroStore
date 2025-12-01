@@ -14,15 +14,15 @@
             <input type="text" placeholder="Buscar produtos..." name="q">
             <button type="submit">🔍</button>
         </form>
-            <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">
+            <a href="perfil.php" id="perfil-link" title="Perfil" class="perfil-icon">
             👤
         </a>
     </header>
     <nav>
-        <a href="TelaInicial.html">Início</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="carrinho.html">Carrinho</a>
-            <!-- O nome de usuário será inserido via JS -->
+        <a href="TelaInicial.php">Início</a>
+        <a href="catalogo.php">Catálogo</a>
+        <a href="carrinho.php">Carrinho</a>
+            br
     </nav>
     
     <div class="perfil-container" id="perfil-container">

@@ -9,40 +9,45 @@
 </head>
 <body class="login-registro-bg">
     <header class="header">
-        <a href="TelaInicial.html" class="astro-title-link">
+        <a href="TelaInicial.php" class="astro-title-link">
             <span class="astro-title">ASTRO STORE</span>
         </a>
-        <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">👤</a>
+        <a href="perfil.php" id="perfil-link" title="Perfil" class="perfil-icon">👤</a>
     </header>
     <nav>
-        <a href="TelaInicial.html">Início</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="carrinho.html">Carrinho</a>
+        <a href="TelaInicial.php">Início</a>
+        <a href="catalogo.php">Catálogo</a>
+        <a href="carrinho.php">Carrinho</a>
     </nav>
 
     <div class="auth-container">
         <h2 class="auth-title">Criar Conta</h2>
-        <form class="auth-form" id="registerFormPage" action="registro.php" method="POST">
+        <form class="auth-form" action="../Controller/usuarioControle.php" method="POST">
+            <input type="hidden" name="acao" value="registrar">
             <div class="form-group">
                 <label for="reg-nome">Nome Completo</label>
-                <input type="text" id="reg-nome" placeholder="Seu nome" required>
+                <input type="text" id="reg-nome" name="nome" placeholder="Seu nome" required>
             </div>
             <div class="form-group">
                 <label for="reg-email">E-mail</label>
-                <input type="email" id="reg-email" placeholder="seuemail@exemplo.com" required>
+                <input type="email" id="reg-email" name="email" placeholder="seuemail@exemplo.com" required>
             </div>
             <div class="form-group">
                 <label for="reg-senha">Senha</label>
-                <input type="password" id="reg-senha" placeholder="Crie uma senha forte" required>
+                <input type="password" id="reg-senha" name="senha" placeholder="Crie uma senha forte" required>
             </div>
             <div class="form-group">
                 <label for="reg-confirma-senha">Confirmar Senha</label>
-                <input type="password" id="reg-confirma-senha" placeholder="Repita a senha" required>
+                <input type="password" id="reg-confirma-senha" name="confirmar" placeholder="Repita a senha" required>
             </div>
-            <div id="register-error-message" class="error-message"></div>
+            <div id="register-error-message" class="error-message">
+                <?php if (isset($_GET['erro'])): ?>
+                    <p style="color: red;"><?= htmlspecialchars($_GET['erro']) ?></p>
+                <?php endif; ?>
+            </div>
             <button class="auth-btn" type="submit">Registrar</button>
         </form>
-        <p class="auth-switch">Já tem uma conta? <a href="Login.html">Faça login</a></p>
+        <p class="auth-switch">Já tem uma conta? <a href="Login.php">Faça login</a></p>
     </div>
 
     <footer>

@@ -9,21 +9,21 @@
 </head>
 <body class="catalogo-bg">
     <header class="header">
-        <a href="TelaInicial.html" class="astro-title-link">
+        <a href="TelaInicial.php" class="astro-title-link">
             <span class="astro-title">ASTRO STORE</span>
         </a>
         <form class="search-bar" action="#" method="get">
             <input type="text" placeholder="Buscar produtos..." name="q">
             <button type="submit">🔍</button>
         </form>
-            <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">
+            <a href="perfil.php" id="perfil-link" title="Perfil" class="perfil-icon">
             👤
         </a>
     </header>
     <nav>
-        <a href="TelaInicial.html">Início</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="carrinho.html">Carrinho</a>
+        <a href="TelaInicial.php">Início</a>
+        <a href="catalogo.php">Catálogo</a>
+        <a href="carrinho.php">Carrinho</a>
             <!-- O nome de usuário sera inserido via JS -->
     </nav>
     <div class="catalog-container">

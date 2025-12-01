@@ -9,21 +9,21 @@
 </head>
 <body class="carrinho-bg" style="min-height: 100vh; display: flex; flex-direction: column;">
     <header class="header">
-        <a href="TelaInicial.html" class="astro-title-link">
+        <a href="TelaInicial.php" class="astro-title-link">
             <span class="astro-title">ASTRO STORE</span>
         </a>
         <form class="search-bar" onsubmit="realizarPesquisa(event)">
             <input type="text" id="search-input" placeholder="Buscar produtos..." name="q">
             <button type="submit">🔍</button>
         </form>
-            <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">
+            <a href="perfil.php" id="perfil-link" title="Perfil" class="perfil-icon">
             👤
         </a>
     </header>
     <nav>
-        <a href="TelaInicial.html">Início</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="carrinho.html">Carrinho</a>
+        <a href="TelaInicial.php">Início</a>
+        <a href="catalogo.php">Catálogo</a>
+        <a href="carrinho.php">Carrinho</a>
             <!-- O nome de usuário será inserido via JS -->
     </nav>
     <div class="cart-container" style="flex: 1;">
@@ -37,10 +37,10 @@
         <div id="empty-cart-box" style="display:none; margin-top:20px;">
             <div>
                 <p>Seu carrinho está vazio.</p>
-                <a href="catalogo.html" class="buy-btn" style="text-decoration:none;">Ir para o Catálogo</a>
+                <a href="catalogo.php" class="buy-btn" style="text-decoration:none;">Ir para o Catálogo</a>
             </div>
         </div>
-        <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='pagamento.html'">Ir para Pagamento</button>
+        <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='pagamento.php'">Ir para Pagamento</button>
     </div>
     <footer style="position: static !important; width: 100%; background: rgba(24,24,72,0.95); color: #fff; text-align: center; padding: 15px 0; border-top: 2px solid #00bfff; box-shadow: 0 -2px 10px rgba(0, 191, 255, 0.2); margin-top: auto !important;">
         &copy; 2025 Astro Store. Todos os direitos reservados.

@@ -8,14 +8,15 @@
 </head>
 <body style="min-height: 100vh; display: flex; flex-direction: column;">
     <header class="header">
-        <a href="TelaInicial.html" class="astro-title-link">
+        <a href="TelaInicial.php" class="astro-title-link">
             <span class="astro-title">ASTRO STORE</span>
+            <a href="../Controller/logout.php" class="perfil-icon" title="Sair">🚪 Sair</a>
         </a>
         <form class="search-bar" onsubmit="realizarPesquisa(event)">
             <input type="text" id="search-input" placeholder="Buscar produtos..." name="q">
             <button type="submit">🔍</button>
         </form>
-        <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">
+        <a href="perfil.php" id="perfil-link" title="Perfil" class="perfil-icon">
         👤
         </a>
     </header>
@@ -30,9 +31,9 @@
     </div>
 
     <nav>
-        <a href="TelaInicial.html">Início</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="carrinho.html">Carrinho</a>
+        <a href="TelaInicial.php">Início</a>
+        <a href="catalogo.php">Catálogo</a>
+        <a href="carrinho.php">Carrinho</a>
     </nav>
 
     <h1 class="destaques-titulo">Destaques do Mês</h1>
@@ -161,7 +162,7 @@
             <p style="color: #fff; opacity: 0.9; font-size: 1.1rem; margin-bottom: 30px;">
                 Explore nosso catálogo completo e descubra produtos incríveis que vão transformar sua experiência de compra.
             </p>
-            <a href="catalogo.html" style="display: inline-block; background: linear-gradient(90deg, #00bfff, #6a5acd); color: #fff; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: transform 0.3s;">
+            <a href="catalogo.php" style="display: inline-block; background: linear-gradient(90deg, #00bfff, #6a5acd); color: #fff; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: transform 0.3s;">
                 Ver Catálogo Completo
             </a>
         </div>

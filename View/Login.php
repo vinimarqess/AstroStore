@@ -1,3 +1,11 @@
+
+<!-- <script src="pronpt.js"></script> -->
+<?php if (isset($_GET['msg'])): ?>
+    <p style="color: green; text-align:center;">
+        <?= htmlspecialchars($_GET['msg']) ?>
+    </p>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,32 +17,33 @@
 </head>
 <body class="login-registro-bg">
     <header class="header">
-        <a href="TelaInicial.html" class="astro-title-link">
+        <a href="TelaInicial.php" class="astro-title-link">
             <span class="astro-title">ASTRO STORE</span>
         </a>
-        <a href="perfil.html" id="perfil-link" title="Perfil" class="perfil-icon">👤</a>
+        <a href="perfil.php" id="perfil-link" title="Perfil" class="perfil-icon">👤</a>
     </header>
     <nav>
-        <a href="TelaInicial.html">Início</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="carrinho.html">Carrinho</a>
+        <a href="TelaInicial.php">Início</a>
+        <a href="catalogo.php">Catálogo</a>
+        <a href="carrinho.php">Carrinho</a>
     </nav>
 
     <div class="auth-container">
         <h2 class="auth-title">Fazer Login</h2>
-        <form class="auth-form" id="loginFormPage">
+        <form class="auth-form" id="loginFormPage" method="POST" action="../Controller/usuarioControle.php">
+            <input type="hidden" name="acao" value="login">
             <div class="form-group">
                 <label for="login-email">E-mail</label>
-                <input type="email" id="login-email" placeholder="seuemail@exemplo.com" required>
+                <input type="email" id="login-email" name="email" placeholder="seuemail@exemplo.com" required>
             </div>
             <div class="form-group">
                 <label for="login-senha">Senha</label>
-                <input type="password" id="login-senha" placeholder="Sua senha" required>
+                <input type="password" id="login-senha" name="senha" placeholder="Sua senha" required>
             </div>
             <div id="login-error-message" class="error-message"></div>
             <button class="auth-btn" type="submit">Entrar</button>
         </form>
-        <p class="auth-switch">Não tem uma conta? <a href="Registro.html">Registre-se aqui</a></p>
+        <p class="auth-switch">Não tem uma conta? <a href="Registro.php">Registre-se aqui</a></p>
     </div>
 
     <footer>
