@@ -1201,3 +1201,47 @@ body.login-registro-bg {
         transform: translateY(0);
     }
 }
+
+/* MODAL DE AVISO LOGIN */
+.modal-avisoClass {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-aviso-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 300px;
+    font-family: Montserrat, sans-serif;
+    animation: fadeIn 0.2s ease;
+}
+
+#modal-avisobtn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #6A5ACD;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#modal-aviso-btn:hover {
+    background: #5848c2;
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1;}
+}

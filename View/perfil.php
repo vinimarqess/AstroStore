@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -31,6 +34,20 @@
     <footer>
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
+
+    <!-- MODAL DE AVISO LOGIN -->
+    <div id="modal-aviso" class="modal-avisoClass" style="display: none;">
+        <div class="modal-aviso-box">
+            <span id="modal-aviso-text"></span>
+
+            <button id="modal-avisobtn">OK</button>
+        </div>
+    </div>
+    
+    <script>
+        const usuarioLogado = <?= json_encode($_SESSION['usuario_id'] ?? false); ?>;
+    </script>
+    
     <script src="pronpt.js"></script>
 </body>
 </html>

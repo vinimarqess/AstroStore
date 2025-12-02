@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../banco/bd.php';
+require_once dirname(__DIR__) . '/conexao/bd.php';
 
 class Usuario {
 

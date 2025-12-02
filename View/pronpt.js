@@ -398,3 +398,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Verifica login via variável PHP
+
+// Ícone de perfil
+const perfilLink = document.getElementById("perfil-link");
+
+// Modal
+const modal = document.getElementById("modal-aviso");
+const modalText = document.getElementById("modal-aviso-text");
+const modalBtn = document.getElementById("modal-avisobtn");
+
+if (perfilLink) {
+    perfilLink.addEventListener("click", function (e) {
+
+        if (!usuarioLogado) {
+            e.preventDefault(); // impede que abra o perfil
+
+            modalText.textContent = "Você precisa fazer login primeiro!";
+            modal.style.display = "flex";
+
+            // Ao clicar no botão OK → Vai para Login.php
+            modalBtn.onclick = function () {
+                window.location.href = "Login.php";
+            }
+        }
+    });
+}
+
+// Fechar modal ao clicar fora
+if (modal) {
+    modal.addEventListener("click", function(e) {
+        if (e.target === this) {
+            modal.style.display = "none";
+        }
+    });
+}

@@ -47,8 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 
     if ($usuario) {
         session_start();
-        $_SESSION['user_id'] = $usuario->id;
-        $_SESSION['user_name'] = $usuario->name;
+            $_SESSION['usuario_id'] = $usuario->id_usuario;
+            $_SESSION['usuario_nome'] = $usuario->nome;
+            $_SESSION['usuario_email'] = $usuario->email;
 
         header("Location: ../View/TelaInicial.php");
         exit;

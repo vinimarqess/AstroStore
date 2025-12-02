@@ -1,10 +1,6 @@
-
-<!-- <script src="pronpt.js"></script> -->
-<?php if (isset($_GET['msg'])): ?>
-    <p style="color: green; text-align:center;">
-        <?= htmlspecialchars($_GET['msg']) ?>
-    </p>
-<?php endif; ?>
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -49,6 +45,7 @@
     <footer>
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
+
     <script src="pronpt.js"></script>
 </body>
 </html>
