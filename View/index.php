@@ -30,7 +30,8 @@ $usuarios = $sql->fetchAll(PDO::FETCH_OBJ);
             <td><?= $usuario->nome ?></td>
             <td><?= $usuario->email ?></td>
             <td><a href="EditarPerfil.php?id=<?= $usuario->id_usuario ?>">editar</a></td>
-            <td><a href="excluir.php?id=<?= $usuario->id_usuario ?>">excluir</a></td>
+            <td><a href="../Controller/usuarioControle.php?acao=excluir&id=<?= $usuario->id_usuario ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">excluir</a></td>
+
         </tr>
         <?php endforeach; ?>
     </table>

@@ -55,15 +55,17 @@ if (!isset($_SESSION['usuario_id'])) {
                         <input type="password" name="senha" placeholder="Digite para alterar">
                     </div>
 
-                <button type="submit" class="perfil-btn">Salvar Alterações</button>        
+                <button type="submit" class="perfil-btn">Salvar Alterações</button>      
+                  
+                <form action="../Controller/usuarioControle.php" method="POST">
+                    <input type="hidden" name="acao" value="excluir">
+                    <button type="submit" class="perfil-btn excluir-btn" onclick="return confirm('Tem certeza que deseja excluir sua conta?')">
+                        Excluir Conta
+                    </button>
+                </form>
             </form>
             
-            <form action="../Controller/usuarioControle.php" method="POST">
-                <input type="hidden" name="acao" value="excluir">
-                <button type="submit" class="perfil-btn excluir-btn" onclick="return confirm('Tem certeza que deseja excluir sua conta?')">
-                    Excluir Conta
-                </button>
-            </form>
+            
     </div>
     <footer>
         &copy; 2025 Astro Store. Todos os direitos reservados.

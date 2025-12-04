@@ -45,12 +45,9 @@ if (!isset($_SESSION['usuario_id'])) {
 
                 <!-- AQUI aparece a tabela quando clicar em Configurações -->
                 <div id="perfil-form-area"></div>
-
-                <form method="get" style="display:inline">
-                    <button action="index.php" type="submit" class="perfil-btn">Usuários</button>
-                    <input type="hidden" name="acao" value="logout">
-                    <button action="../Controller/usuarioControle.php" type="submit" class="perfil-btn sair">Sair</button>
-                </form>
+                
+                <button class="perfil-btn" onclick="window.location.href='index.php'">Usuários</button>
+                <button class="perfil-btn" onclick="window.location.href='../Controller/logout.php'">Sair</button>
 
         </div>
 
