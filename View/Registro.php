@@ -56,6 +56,6 @@ session_start();
     <footer>
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
-    <script src="pronpt.js"></script>
+    <script src="prompt.js"></script>
 </body>
 </html>

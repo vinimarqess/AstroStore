@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../banco/bd.php';
+require_once __DIR__ . '/../conexao/bd.php';
 
 $sql = $conn->query("SELECT * FROM usuario");
 $usuarios = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -29,7 +29,7 @@ $usuarios = $sql->fetchAll(PDO::FETCH_OBJ);
             <td><?= $usuario->id_usuario ?></td>
             <td><?= $usuario->nome ?></td>
             <td><?= $usuario->email ?></td>
-            <td><a href="editar.php?id=<?= $usuario->id_usuario ?>">editar</a></td>
+            <td><a href="EditarPerfil.php?id=<?= $usuario->id_usuario ?>">editar</a></td>
             <td><a href="excluir.php?id=<?= $usuario->id_usuario ?>">excluir</a></td>
         </tr>
         <?php endforeach; ?>

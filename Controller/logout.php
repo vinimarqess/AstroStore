@@ -6,5 +6,5 @@ if(session_status() != PHP_SESSION_ACTIVE){
 
 //DESTROI A SESSÃO
 session_unset();
-header("Location: ../View/Login.php?msg=" . urlencode("Você saiu da conta."));
+header("Location: ../View/TelaInicial.php?msg=" . urlencode("Você saiu da conta."));
 exit;

@@ -1,6 +1,9 @@
 <?php
-    session_start();
+session_start();
 ?>
+
+<script src="prompt.js"></script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,7 +16,6 @@
     <header class="header">
         <a href="TelaInicial.php" class="astro-title-link">
             <span class="astro-title">ASTRO STORE</span>
-            <a href="../Controller/logout.php" class="perfil-icon" title="Sair">🚪 Sair</a>
         </a>
         <form class="search-bar" onsubmit="realizarPesquisa(event)">
             <input type="text" id="search-input" placeholder="Buscar produtos..." name="q">
@@ -175,6 +177,6 @@
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
     
-    <script src="pronpt.js"></script>
+    <script src="prompt.js"></script>
 </body>
 </html>

@@ -124,7 +124,12 @@ function fecharModalProduto() {
 function renderPerfil() {
     const container = document.getElementById('perfil-container');
     if (!container) return;
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuario = usuarioLogado ? {
+        id: usuarioLogado,
+        nome: usuarioNome,
+        email: usuarioEmail
+    } : null;
+    
 
     if (!usuario) {
         // CORREÇÃO: Caminho relativo (mesma pasta) e extensão correta (.php)
@@ -135,7 +140,7 @@ function renderPerfil() {
             <button class="perfil-btn" onclick="window.location.href='Registro.php'">Registrar</button>
         `;
     } else {
-        // SE ESTIVER LOGADO, MOSTRA TODAS AS OPÇÕES (CORRIGIDO)
+        // SE ESTIVER LOGADO, MOSTRA TODAS AS OPÇÕES
         container.innerHTML = `
             <h2>Bem-vindo, ${usuario.nome}!</h2>
             <button class="perfil-btn" onclick="mostrarConta()">Configurações de Conta</button>
@@ -146,22 +151,6 @@ function renderPerfil() {
             <div id="perfil-form-area"></div>
         `;
     }
-}
-
-function mostrarConta() {
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    const area = document.getElementById('perfil-form-area');
-    if (!area) return;
-    area.innerHTML = `
-        <form class="perfil-form" onsubmit="mudarNome(event)">
-            <input type="text" id="novo-nome" placeholder="Novo nome" value="${usuario.nome}" required>
-            <button class="perfil-btn" type="submit">Alterar Nome</button>
-        </form>
-        <form class="perfil-form" onsubmit="mudarSenha(event)">
-            <input type="password" id="nova-senha" placeholder="Nova senha" required>
-            <button class="perfil-btn" type="submit">Alterar Senha</button>
-        </form>
-    `;
 }
 
 function mostrarHistorico() {
@@ -202,11 +191,10 @@ function mudarSenha(e) {
     document.getElementById('perfil-form-area').innerHTML = ''; // Limpa a área do formulário
 }
 
-
 function logout() {
-    localStorage.removeItem('usuario');
-    renderPerfil(); // Re-renderiza para mostrar os botões de login/registro
+    window.location.href = "../Controller/logout.php";
 }
+
 
 function atualizarNomePerfilNav(nomeUsuario) {
     let perfilNav = document.getElementById('perfil-link');
@@ -373,10 +361,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // --- ATUALIZA NOME DE USUÁRIO NA NAVEGAÇÃO (EM TODAS AS PÁGINAS) ---
-    const usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
-    if (usuarioLogado) {
-        atualizarNomePerfilNav(usuarioLogado.usuario);
-    }
+    //const usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
+    //if (usuarioLogado) {
+    //    atualizarNomePerfilNav(usuarioLogado.usuario);
+    //}
     
     // Fechar modal de pesquisa ao clicar fora
     const modalPesquisa = document.getElementById('modal-pesquisa');
@@ -413,24 +401,25 @@ if (perfilLink) {
     perfilLink.addEventListener("click", function (e) {
 
         if (!usuarioLogado) {
-            e.preventDefault(); // impede que abra o perfil
+            e.preventDefault(); // impede abrir o perfil
 
             modalText.textContent = "Você precisa fazer login primeiro!";
             modal.style.display = "flex";
 
-            // Ao clicar no botão OK → Vai para Login.php
+            // Botão OK → leva para Login.php
             modalBtn.onclick = function () {
                 window.location.href = "Login.php";
-            }
+            };
         }
     });
 }
 
 // Fechar modal ao clicar fora
 if (modal) {
-    modal.addEventListener("click", function(e) {
+    modal.addEventListener("click", function (e) {
         if (e.target === this) {
             modal.style.display = "none";
         }
     });
 }
+

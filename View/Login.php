@@ -46,6 +46,9 @@ session_start();
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
 
-    <script src="pronpt.js"></script>
+    <script>
+        const usuarioLogado = <?= json_encode($_SESSION['usuario'] ?? false); ?>;
+    </script>
+    <script src="prompt.js"></script>
 </body>
 </html>

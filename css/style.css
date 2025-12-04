@@ -607,9 +607,11 @@ body.catalogo-bg {
     overflow: hidden;
     z-index: 1;
 }
+
 .perfil-btn:hover {
     background: #6a5acd;
 }
+
 .perfil-form {
     display: flex;
     flex-direction: column;
@@ -624,14 +626,6 @@ body.catalogo-bg {
     border: none;
     font-size: 1rem;
 }
-.logout-btn {
-    background: #ff4d4d;
-    margin-top: 20px;
-}
-.logout-btn:hover {
-    background: #c0392b;
-}
-
 /* ===================== Nome de usuario abaixo do ícone de perfil na barra de navegação ===================== */
 #perfil-nome-nav {
     display: block;
@@ -1244,4 +1238,59 @@ body.login-registro-bg {
 @keyframes fadeIn {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1;}
+}
+
+
+
+
+
+/* --- BOTÕES PADRÃO --- */
+.perfil-btn {
+    width: 85%;
+    padding: 12px;
+    margin: 12px auto;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #00b2ff, #8254ff);
+    color: white;
+    transition: 0.2s;
+}
+
+.perfil-btn:hover {
+    transform: scale(1.05);
+}
+    
+/* --- BOTÃO DE LOGOUT --- */
+.logout-btn {
+    width: 85%;
+    padding: 12px;
+    margin: 12px auto;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: #ff4f4f;
+    color: white;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #ff2e2e;
+}
+
+/* SUAVIZAÇÃO */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.excluir-btn {
+    background-color: #d9534f;
+    color: white;
+    margin-top: 20px;
+}
+
+.excluir-btn:hover {
+    background-color: #c9302c;
 }

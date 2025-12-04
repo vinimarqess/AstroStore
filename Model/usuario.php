@@ -48,5 +48,43 @@ class Usuario {
             return false;
         }
     }
+
+    public static function editar($id, $nome, $senha = null) {
+        global $conn;
+
+        // Se for alterar senha
+        if ($senha !== null && $senha !== "") {
+            $hash = password_hash($senha, PASSWORD_BCRYPT);
+            $sql = $conn->prepare("
+                UPDATE usuario 
+                SET nome = :nome, senha = :senha 
+                WHERE id_usuario = :id
+            ");
+            $sql->bindValue(":senha", $hash);
+        } 
+        // Se NÃO for alterar senha
+        else {
+            $sql = $conn->prepare("
+                UPDATE usuario 
+                SET nome = :nome 
+                WHERE id_usuario = :id
+            ");
+        }
+
+        $sql->bindValue(":nome", $nome);
+        $sql->bindValue(":id", $id);
+
+        return $sql->execute();
+    }
+
+    public static function excluir($id) {
+        global $conn;
+
+        $sql = $conn->prepare("DELETE FROM usuario WHERE id_usuario = :id");
+        $sql->bindValue(':id', $id);
+
+        return $sql->execute();
+    }
+
 }
 ?>
