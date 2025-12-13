@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -46,9 +42,6 @@ session_start();
         &copy; 2025 Astro Store. Todos os direitos reservados.
     </footer>
 
-    <script>
-        const usuarioLogado = <?= json_encode($_SESSION['usuario'] ?? false); ?>;
-    </script>
     <script src="prompt.js"></script>
 </body>
 </html>

@@ -1,20 +1,20 @@
 FROM php:8.2-apache
 
-# Instalar extensões PHP necessárias
+# instalar extensões PHP necessaria
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Habilitar mod_rewrite do Apache
+# habilitar mod_rewrite do apache
 RUN a2enmod rewrite
 
-# Copiar arquivos do projeto para o container
+# copiar arquivos do projeto para o container
 COPY . /var/www/html/
 
-# Definir permissões corretas
+# definir permissoes corretas
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Expor porta 80
+# expõe porta 80
 EXPOSE 80
 
-# Iniciar Apache
+# inicia Apache
 CMD ["apache2-foreground"]

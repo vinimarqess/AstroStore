@@ -10,7 +10,8 @@ $usuarios = $sql->fetchAll(PDO::FETCH_OBJ);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuários cadastrados</title>
+    <title>Gerenciar Usuários - Astro Store</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <h1>Usuários cadastrados</h1>
@@ -31,7 +32,6 @@ $usuarios = $sql->fetchAll(PDO::FETCH_OBJ);
             <td><?= $usuario->email ?></td>
             <td><a href="EditarPerfil.php?id=<?= $usuario->id_usuario ?>">editar</a></td>
             <td><a href="../Controller/usuarioControle.php?acao=excluir&id=<?= $usuario->id_usuario ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">excluir</a></td>
-
         </tr>
         <?php endforeach; ?>
     </table>

@@ -1,26 +1,38 @@
 <?php
-// router
-// inclui arquivos PHP da pasta View
+// Router Principal Astro Store
+// Gerencia o roteamento de todas as páginas da aplicação
+
+// Inicia a sessão (necessário para todas as páginas)
+session_start();
 
 $allowed = [
-    'TelaInicial', 'catalogo', 'Carrinho', 'EditarPerfil', 'index', 'Login', 'pagamento', 'perfil', 'Registro', 'teste'
+    'TelaInicial',
+    'catalogo',
+    'Carrinho',
+    'EditarPerfil',
+    'gerenciarUsuarios',
+    'Login',
+    'pagamento',
+    'perfil',
+    'Registro',
+    'teste'
 ];
 
-$page = isset($_GET['page']) ? $_GET['page'] : 'TelaInicial';
-// limpar entrada para evitar traversal
+
+$page = $_GET['page'] ?? 'TelaInicial';
+$page = basename($page);
 $page = preg_replace('/[^a-zA-Z0-9_]/', '', $page);
 
 if (!in_array($page, $allowed)) {
-    header("HTTP/1.0 404 Not Found");
-    echo "Página não encontrada.";
-    exit;
+    http_response_code(404);
+    die('Erro 404: Página não encontrada.');
 }
 
-$path = __DIR__ . DIRECTORY_SEPARATOR . 'View' . DIRECTORY_SEPARATOR . $page . '.php';
+$path = __DIR__ . '/View/' . $page . '.php';
 
 if (file_exists($path)) {
-    include $path;
+    require_once $path;
 } else {
-    header("HTTP/1.0 404 Not Found");
-    echo "Página não encontrada.";
+    http_response_code(404);
+    die('Erro 404: Arquivo não encontrado.');
 }
