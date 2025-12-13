@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+
+# Redirecionar para a pasta View
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ View/$1 [L]
+
+# Habilitar CORS (se necessário)
+Header set Access-Control-Allow-Origin "*"
