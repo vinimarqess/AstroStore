@@ -1,6 +1,6 @@
 <?php
 // Router Principal Astro Store
-// Gerencia o roteamento de todas as páginas da aplicação
+// Gerencia o roteamento de todas as paginas da aplicação
 
 // Inicia a sessão (necessário para todas as páginas)
 session_start();

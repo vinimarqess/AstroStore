@@ -1,9 +1,9 @@
 <?php
 
-$host = "localhost";
-$dbname = "astro"; // seu BD
-$user = "root";
-$pass = "";
+$host = "astrostore_db";
+$dbname = "astrostore"; // seu BD
+$user = "astrostore_user";
+$pass = "astrostore_pass";
 
 // Conexão PDO
 try {
